@@ -16,8 +16,8 @@ const logoutButton = document.getElementById('logout-button');
 const logoutDropdownContent = document.getElementById('logout-dropdown-content'); 
 
 // Burger Menu Elements
-const burger = document.getElementById("burger");
-const navMenu = document.getElementById("nav-menu");
+const burger = document.getElementById('burger');
+const navMenu = document.getElementById('nav-menu');
 
 // 🛑 ფორმის ცვლადები (დეკლარირებულია გლობალურად, ინიციალიზდება DOMContentLoaded-ში)
 let loginFormContainer, registerFormContainer, showLoginTab, showRegisterTab, loginForm, loginButton, loginError, registerError, registrationForm, registerButton;
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('nav a[href^="#"]').forEach(a => a.addEventListener('click', e => {
         e.preventDefault();
         const t = document.querySelector(a.getAttribute('href'));
-        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }));
 
     // 1.3 Reveal Animations
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 en.target.classList.add('revealed');
                 en.target.classList.remove('revealer');
             }
-        })
+        });
     }, { threshold: .12 });
     document.querySelectorAll('.revealer').forEach(el => io.observe(el));
 
@@ -114,26 +114,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // Burger Menu Logic
     if (burger && navMenu) {
         const toggleMenu = () => {
-            burger.classList.toggle("active");
-            navMenu.classList.toggle("open");
+            burger.classList.toggle('active');
+            navMenu.classList.toggle('open');
         };
         
-        burger.addEventListener("click", (e) => {
+        burger.addEventListener('click', (e) => {
             e.stopPropagation();
             toggleMenu();
         });
     
-        document.querySelectorAll("#nav-menu a").forEach(link => {
-            link.addEventListener("click", () => {
-                if (navMenu.classList.contains("open")) {
+        document.querySelectorAll('#nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('open')) {
                     toggleMenu();
                 }
             });
         });
     
-        document.addEventListener("click", (e) => {
+        document.addEventListener('click', (e) => {
             const clickedInsideMenu = navMenu.contains(e.target) || burger.contains(e.target);
-            if (!clickedInsideMenu && navMenu.classList.contains("open")) {
+            if (!clickedInsideMenu && navMenu.classList.contains('open')) {
                 toggleMenu();
             }
         });
@@ -273,10 +273,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typeof auth === 'undefined') return;
             auth.signOut()
                 .then(() => {
-                    alert("You have been logged out successfully.");
+                    alert('You have been logged out successfully.');
                 })
                 .catch((error) => {
-                    alert("Logout Error: " + error.message);
+                    alert('Logout Error: ' + error.message);
                 });
         });
     }
