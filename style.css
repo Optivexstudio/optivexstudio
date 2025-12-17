@@ -1,0 +1,1781 @@
+/*
+======================================================
+  OPTIVEX STUDIO - OPTIMIZED STYLE.CSS
+======================================================
+*/
+
+/* --- 1. RESET & BASE STYLES --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background: #ffffff;
+    color: #0b1220;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* --- NEW AUTH MODAL STYLES (1.2) --- */
+
+.modal-content h3 {
+    text-align: center;
+    color: #f1f5f9; /* ღია ტექსტი მუქ ფონზე */
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+}
+
+.google-btn {
+    background-color: #ffffff;
+    color: #0b1220;
+    border: 1px solid #e2e8f0;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.google-btn:hover {
+    background-color: #f6f9ff;
+    transform: none; /* არ გადავწიოთ */
+}
+
+.google-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.separator {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 0.9rem;
+    color: #94a3b8;
+    position: relative;
+}
+
+.separator::before, .separator::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background: #475569;
+}
+
+.separator::before {
+    left: 0;
+}
+
+.separator::after {
+    right: 0;
+}
+
+/* Auth Form Fields */
+.form-container input {
+    margin-bottom: 12px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- 2. LOADER --- */
+#site-loader {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #fbfdff, #f4f9ff);
+    z-index: 9999;
+    transition: opacity .45s;
+}
+
+.spinner {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: conic-gradient(#7c3aed, #4361ee, #3b82f6, #7c3aed);
+    animation: spin 1s linear infinite;
+    filter: blur(6px);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* --- 3. NAVBAR STYLES (MODERN & CLEAN) --- */
+
+nav {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: #ffffff; /* თეთრი ფონი თავიდანვე */
+    border-bottom: 1px solid #e0e7ff; /* რბილი ხაზი გამოყოფისთვის */
+    transition: background-color 0.3s, box-shadow 0.3s, padding 0.3s;
+    padding: 20px 0; /* ცოტა მეტი ჰაერი */
+}
+
+/* JS Class for Scroll Effect */
+nav.scrolled {
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    padding: 10px 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #071133; /* მუქი ფერი უკეთესია გამჭვირვალე ფონზე */
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    transition: color 0.3s;
+}
+
+/* ნავიგაციის ბმულები */
+.nav-list {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-list a {
+    color: #334155;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.nav-list a:hover {
+    color: #7c3aed;
+}
+
+/* აქტიური ბმულის ხაზი */
+.nav-list a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #7c3aed;
+    transition: width 0.3s;
+}
+
+.nav-list a:hover::after {
+    width: 100%;
+}
+
+/* Auth Control Styling */
+.auth-control {
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 15px;
+}
+
+/* Email/User Button */
+.user-email-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-weight: 600; 
+    color: #7c3aed;
+    transition: background 0.3s;
+    font-size: 0.95rem;
+}
+
+.user-email-btn:hover {
+    background-color: rgba(124, 58, 237, 0.1); 
+}
+
+/* Contact CTA Button in NAV */
+.nav-list .btn.primary {
+    margin-left: 10px; /* დაშორება წინა ბმულისგან */
+    font-size: 0.88rem; /* ოდნავ პატარა ტექსტი */
+    padding: 8px 16px; 
+    /* ეს უზრუნველყოფს, რომ ღილაკი ზუსტად ეტევა ნავიგაციაში */
+}
+
+
+/* Dropdown Content */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 160px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 1001; 
+    top: 150%;
+    right: 0;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #e0e7ff;
+}
+
+.logout-red-btn {
+    width: 100%;
+    background: #ef4444; /* წითელი ფონი */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+/* Burger Menu */
+.burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 5px;
+}
+
+.burger span {
+    width: 25px;
+    height: 3px;
+    background-color: #071133;
+    transition: 0.4s;
+}
+
+/* Burger Animation */
+.burger.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.burger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.burger.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* MOBILE MENU STYLES */
+@media (max-width: 900px) {
+    .nav-list {
+        display: none;
+        flex-direction: column;
+        position: fixed; /* Fixed position for overlay */
+        top: 65px; 
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        padding: 30px 0;
+        text-align: center;
+        transition: transform 0.3s ease-out;
+        transform: translateX(-100%); /* მალავს მარცხნივ */
+        height: 100vh;
+        z-index: 999;
+    }
+    
+    .nav-list.open {
+        transform: translateX(0); /* აჩენს */
+    }
+
+    .nav-list a {
+        padding: 15px 0;
+        border-bottom: 1px solid #f1f5f9;
+        color: #071133; /* მუქი ტექსტი მენიუში */
+    }
+    
+    .nav-list a:hover {
+        background-color: #f6f9ff;
+    }
+
+    .nav-list a:last-child {
+        border-bottom: none;
+    }
+    
+    .burger {
+        display: flex;
+    }
+    
+    .hide-on-mobile {
+        display: none !important; 
+    }
+    
+    /* ავთენტიფიკაციის გასწორება მენიუში */
+    .auth-control {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 15px 0;
+        border-bottom: 1px solid #f1f5f9;
+        gap: 10px;
+    }
+    .user-email-btn {
+        color: #071133;
+    }
+}
+
+
+/* --- 4. HERO SECTION --- */
+.hero {
+    min-height: 72vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(180deg, #ffffff, #f6f9ff);
+    position: relative;
+    padding: 120px 20px 60px; /* მეტი ჰაერი NAV-ის ქვემოთ */
+    overflow: hidden;
+}
+
+.hero .inner {
+    max-width: 980px;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 2.6rem;
+    letter-spacing: .4px;
+    margin-bottom: 10px;
+    color: #071133;
+}
+
+.hero p {
+    opacity: .9;
+    margin-bottom: 18px;
+    color: #334155;
+    line-height: 1.6;
+}
+
+.hero .cta {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+/* Background Shapes for Hero */
+.hero::before,
+.hero::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    opacity: .12;
+    filter: blur(40px);
+}
+
+.hero::before {
+    width: 420px;
+    height: 420px;
+    left: -60px;
+    top: -40px;
+    background: radial-gradient(circle, #f0e9ff, #e7f0ff);
+}
+
+.hero::after {
+    width: 300px;
+    height: 300px;
+    right: -80px;
+    bottom: -40px;
+    background: radial-gradient(circle, #eaf4ff, #f4ebff);
+}
+
+/* --- 5. BUTTONS (CTA) --- */
+
+.btn {
+    display: inline-flex;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-weight: 700;
+    border: 1px solid rgba(11, 17, 34, .06);
+    background: #ffffff;
+    color: #071133;
+    transition: all .22s;
+    box-shadow: 0 6px 18px rgba(16, 24, 40, .04);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn:hover {
+    transform: translateY(-2px); /* შევამცირეთ -4px-დან */
+}
+
+.btn.primary {
+    background: linear-gradient(90deg, #7c3aed, #4361ee);
+    color: #fff;
+    box-shadow: 0 12px 30px rgba(67, 97, 238, .2); /* გავაძლიერეთ ჩრდილი */
+    border: none; /* primary-ს არ სჭირდება თეთრი ბორდერი */
+}
+
+.btn.ghost {
+    background: transparent;
+    color: #071133;
+    border: 1px solid #e0e7ff;
+}
+
+/* Small Button Fix */
+.small-btn {
+    padding: 8px 14px; 
+    font-size: 0.9rem;
+    border-radius: 8px;
+}
+
+.large-btn {
+    padding: 16px 30px;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    font-weight: 700;
+}
+
+/* --- 6. GLOBAL SECTIONS & TITLES --- */
+
+section {
+    padding: 72px 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 28px;
+    color: #4b2fb3;
+    font-weight: 700;
+}
+
+/* --- 7. ABOUT US --- */
+
+.about-us {
+    padding: 80px 20px;
+    background-color: #ffffff;
+}
+
+.about-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; 
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.lead-text {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #071133;
+}
+
+.about-text p {
+    line-height: 1.7;
+    margin-bottom: 15px;
+    color: #334155;
+}
+
+.tech-focus {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid rgba(124, 58, 237, 0.1); 
+    box-shadow: 0 4px 18px rgba(124, 58, 237, 0.08); 
+}
+
+.tech-focus h3 {
+    color: #4b2fb3;
+    margin-bottom: 15px;
+    font-size: 1.25rem;
+}
+
+.tech-focus ul {
+    list-style: none;
+    padding: 0;
+}
+
+.tech-focus li {
+    padding: 8px 0;
+    border-bottom: 1px dashed #e5e7eb;
+    color: #071133;
+    font-weight: 500;
+}
+
+.tech-focus li:last-child {
+    border-bottom: none;
+}
+
+/* --- 8. WHY CHOOSE US --- */
+
+.why-us {
+    padding: 80px 20px;
+    background-color: #fbfdff; /* ფონი გამოყოფისთვის */
+}
+
+.why-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.why-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid #e0e7ff;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    transition: 0.25s;
+    max-width: 350px;
+}
+
+.why-card h3 {
+    color: #4b2fb3;
+    margin-bottom: 10px;
+}
+
+.why-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 22px rgba(124, 58, 237, 0.1);
+}
+
+/* --- 9. SKILLS --- */
+
+.skills-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 14px;
+}
+
+.skill {
+    padding: 14px;
+    border-radius: 10px;
+    background: #ffffff;
+    text-align: center;
+    font-weight: 700;
+    border: 1px solid #e0e7ff;
+    color: #0b1220;
+    box-shadow: 0 6px 18px rgba(11, 17, 34, .03);
+}
+
+/* --- 10. WORKFLOW --- */
+
+.workflow {
+    max-width: 980px;
+    margin: 0 auto;
+    display: grid;
+    gap: 12px;
+}
+
+.workflow-step {
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 10px;
+    border-left: 4px solid #7c3aed;
+    box-shadow: 0 6px 20px rgba(11, 17, 34, .04);
+}
+
+.workflow-step h4 {
+    margin-bottom: 6px;
+    color: #071133;
+}
+
+.workflow-step p {
+    color: #334155;
+}
+
+/* --- 11. PROJECTS --- */
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 22px;
+}
+
+.project-card {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e0e7ff;
+    background: #ffffff;
+    transition: transform .28s, box-shadow .28s;
+    box-shadow: 0 8px 26px rgba(11, 17, 34, .04);
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 26px 80px rgba(11, 17, 34, .08);
+}
+
+.project-media {
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
+}
+
+.project-media img {
+    width: 92%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(11, 17, 34, .04);
+}
+
+.project-info {
+    padding: 16px;
+}
+
+.project-info h3 {
+    margin-bottom: 8px;
+    color: #2f2b6f;
+}
+
+.project-info p {
+    color: #475569;
+}
+
+.project-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Project Actions Buttons */
+.ghost {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: transparent;
+    color: #071133;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.ghost:hover {
+    background: #f1f5f9;
+}
+
+/* --- 12. LIGHTBOX --- */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 6, 23, .85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 24px;
+    transition: opacity 0.35s;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.lightbox.active {
+    opacity: 1;
+    display: flex; /* Display flex when active */
+    pointer-events: auto;
+}
+
+.lightbox img {
+    max-width: 92%;
+    max-height: 86%;
+    border-radius: 10px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .5);
+}
+
+
+/* --- 13. TESTIMONIALS --- */
+
+.testimonials-section {
+    padding: 80px 20px;
+    background-color: #071133;
+}
+
+.testimonials-section .section-title {
+    color: #ffffff;
+    margin-bottom: 50px;
+}
+
+.testimonial-slider {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap; 
+}
+
+.testimonial-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+    max-width: 350px;
+    flex: 1;
+    min-width: 280px;
+}
+
+.testimonial-card .quote {
+    font-style: italic;
+    color: #334155;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.testimonial-card .client-info {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 15px;
+}
+
+.testimonial-card .client-name {
+    display: block;
+    font-weight: 700;
+    color: #4b2fb3;
+}
+
+.testimonial-card .client-title {
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+/* --- 14. FAQ & GUARANTEE --- */
+
+.faq-section {
+    padding: 80px 20px;
+    background-color: #ffffff;
+}
+
+.faq-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.faq-list {
+    flex: 2;
+    min-width: 300px;
+}
+
+.guarantee-block {
+    flex: 1;
+    min-width: 250px;
+}
+
+.faq-list h3, .guarantee-block h3 {
+    font-size: 1.6rem;
+    color: #4b2fb3;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e0e7ff;
+    padding-bottom: 10px;
+}
+
+.faq-item {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #e2e8f0;
+}
+
+.faq-item h4 {
+    font-size: 1.1rem;
+    color: #071133;
+    margin-bottom: 8px;
+}
+
+.faq-item p {
+    color: #475569;
+}
+
+.guarantee-card {
+    background-color: #f6f9ff;
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid #7c3aed;
+}
+
+.guarantee-card h4 {
+    color: #7c3aed;
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.guarantee-card ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 20px;
+}
+
+.guarantee-card ul li {
+    margin-bottom: 10px;
+    color: #071133;
+    font-weight: 500;
+}
+
+.guarantee-card ul li .icon {
+    margin-right: 10px;
+    color: #10b981;
+}
+
+/* --- 15. SERVICE FOCUS --- */
+
+.service-focus-section {
+    padding: 80px 20px;
+    background-color: #f6f9ff;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #475569;
+    margin-top: -20px;
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+}
+
+.focus-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.focus-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    max-width: 350px;
+    flex: 1;
+    min-width: 280px;
+    text-align: center;
+    transition: box-shadow 0.3s, transform 0.3s;
+    border: 1px solid #e0e7ff;
+}
+
+.focus-card:hover {
+    box-shadow: 0 10px 30px rgba(124, 58, 237, 0.15);
+    transform: translateY(-4px);
+}
+
+.focus-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.focus-card h3 {
+    color: #4b2fb3;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.focus-card p {
+    color: #334155;
+    margin-bottom: 20px;
+}
+
+.focus-card ul {
+    list-style: none;
+    padding-left: 0;
+    text-align: left;
+    margin-top: 15px;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 15px;
+}
+
+.focus-card ul li {
+    font-size: 0.9rem;
+    color: #475569;
+    margin-bottom: 5px;
+}
+
+
+/* --- 16. PARTNERS --- */
+
+.partners-section {
+    padding: 80px 20px;
+    background-color: #f6f9ff;
+}
+
+.partners-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.partner-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid rgba(124, 58, 237, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+}
+
+.partner-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(124, 58, 237, 0.1);
+}
+
+.partner-logo-container {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.partner-name-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4b2fb3;
+}
+
+.partner-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #071133;
+}
+
+.partner-card p {
+    color: #334155;
+    margin-bottom: 15px;
+}
+
+.partner-link {
+    color: #7c3aed;
+    font-weight: 600;
+    text-decoration: underline;
+    display: inline-block;
+}
+
+
+/* --- 17. CONTACT (Collaboration CTA) --- */
+
+.collaboration-cta {
+    padding: 80px 20px;
+    text-align: center;
+    background: linear-gradient(180deg, #f6f9ff, #ffffff);
+}
+
+.cta-wrap {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid rgba(124, 58, 237, 0.15); 
+    box-shadow: 0 16px 40px rgba(124, 58, 237, 0.1); 
+}
+
+.cta-message {
+    font-size: 1.25rem;
+    color: #071133;
+    margin-bottom: 30px;
+}
+
+.cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.email-note {
+    margin-top: 25px;
+    color: #475569;
+}
+
+.email-note a {
+    color: #4b2fb3;
+    font-weight: 600;
+}
+
+/* --- 18. AUTH MODAL --- */
+
+.modal {
+    display: none;
+    position: fixed; 
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+    background-color: #0b1220;
+    margin: 10% auto;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%; 
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    color: white;
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.auth-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #94a3b8;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+}
+
+.active-tab {
+    color: #7c3aed;
+    border-bottom: 2px solid #7c3aed;
+    font-weight: 600;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    box-sizing: border-box;
+    background: #1e293b;
+    color: #ffffff;
+}
+
+.full-width-btn {
+    width: 100%;
+    margin-top: 15px;
+    background: #4b2fb3;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.auth-error-message {
+    color: #ef4444;
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+/* Hide Tawk.to when custom chat is active */
+.tawk-maximized-container, 
+.tawk-minimized-container {
+    display: none !important;
+}
+
+
+/* --- 19. FOOTER --- */
+
+footer {
+    padding: 28px;
+    text-align: center;
+    color: #6b7280;
+    opacity: .95;
+    margin-top: 36px;
+    background-color: #f8fafc;
+}
+
+/* --- 20. REVEAL ANIMATIONS --- */
+
+.revealer {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: all .6s cubic-bezier(.22, .9, .2, 1);
+}
+
+.revealer.revealed {
+    opacity: 1;
+    transform: none;
+}
+
+/* --- 21. RESPONSIVE MEDIA QUERIES --- */
+
+@media(max-width: 900px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr; 
+    }
+    
+    .faq-content {
+        flex-direction: column;
+    }
+
+    
+.nav-list {
+        /* ... სხვა სტილები ... */
+        
+        position: fixed; 
+        top: 65px; 
+        left: auto; /* 🛑 შევცვალეთ left: 0-ის ნაცვლად left: auto */
+        right: 0;  /* 🛑 მენიუ დაიწყება ეკრანის მარჯვენა კიდეზე */
+        width: 50%; 
+        
+        /* ... სხვა სტილები ... */
+        
+        /* 🛑 მენიუ დამალულია (გადაწეულია მარჯვნივ) */
+        transform: translateX(100%); 
+        
+        /* ... სხვა სტილები ... */
+    }
+    
+    .nav-list.open {
+        /* 🛑 მენიუ გამოჩნდება (გადაწევა გაუქმებულია) */
+        transform: translateX(0); 
+        display: flex; 
+    }
+}
+
+@media(max-width: 600px) {
+    .cta-actions {
+        flex-direction: column; 
+    }
+    
+    .large-btn {
+        width: 100%;
+    }
+}
+
+@media(max-width: 520px) {
+    .contact-wrap {
+        padding: 16px; 
+    }
+
+    .contact-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-actions {
+        flex-direction: column; 
+        gap: 10px;
+        align-items: stretch;
+    }
+}
+
+
+
+/* --- Tawk.to Initial Hiding Fix (ANTI-FLASH - Aggressive Fix) --- */
+
+.tawk-minimized-container,
+.tawk-maximized-container {
+    /* მთლიანად გათიშეთ რენდერინგი და ვიჯეტის სივრცე */
+    visibility: hidden !important; 
+    opacity: 0 !important;
+    display: none !important; 
+    width: 0 !important;
+    height: 0 !important;
+    pointer-events: none !important;
+}
+
+
+/* ======================================================= */
+/* 1. გენერალური სექციის სტილი */
+/* ======================================================= */
+.comparison-section {
+    padding: 80px 0;
+    background-color: #f7f9fc; /* ღია ნაცრისფერი ფონი სექციისთვის */
+    text-align: center;
+}
+
+.comparison-section h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #1e1e1e;
+}
+
+.comparison-section .subtitle {
+    font-size: 18px;
+    color: #6a6a6a;
+    margin-bottom: 50px;
+}
+
+/* ======================================================= */
+/* 2. Grid Layout (ორი სვეტი დესკტოპზე) */
+/* ======================================================= */
+.contrast-grid {
+    display: grid;
+    /* სვეტების ზომა: 45% ტრადიციულს, 55% Optivex-ს (ვიზუალური უპირატესობა) */
+    grid-template-columns: 0.8fr 1.2fr; 
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* მობილურზე (თუ თქვენი საიტის ზომა 768px-ზე პატარაა) */
+@media (max-width: 768px) {
+    .contrast-grid {
+        grid-template-columns: 1fr; /* ერთ სვეტად გადაწყობა */
+    }
+}
+
+/* ======================================================= */
+/* 3. შედარების ბარათები (Cards) */
+/* ======================================================= */
+.compare-card {
+    padding: 30px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.compare-card h3 {
+    font-size: 22px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid; /* მცირე გამყოფი ხაზი სათაურის ქვეშ */
+}
+
+/* ======================================================= */
+/* 4. ტრადიციული სააგენტოების ბარათი (Neutral/Negative) */
+/* ======================================================= */
+.traditional-method {
+    background-color: #ffffff; /* თეთრი ფონი */
+    border: 1px solid #e8e8e8;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.traditional-method h3 {
+    color: #9e2a2a; /* მუქი წითელი სათაური */
+    border-bottom-color: #f0c9c9;
+}
+
+/* ======================================================= */
+/* 5. Optivex Studio ბარათი (Featured/Positive) */
+/* ======================================================= */
+.optivex-innovation {
+    background-color: #e6f3ff; /* ღია ცისფერი აქცენტირებული ფონი */
+    border: 1px solid #a6d8ff;
+    /* ვიზუალური უპირატესობა: ამოწეული ბარათი */
+    box-shadow: 0 10px 30px rgba(0, 123, 255, 0.15); 
+}
+
+.optivex-innovation h3 {
+    color: #007bff; /* Optivex-ის ლურჯი სათაური */
+    border-bottom-color: #90caff;
+}
+
+/* ======================================================= */
+/* 6. სიის სტილი */
+/* ======================================================= */
+.comparison-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 25px;
+}
+
+.comparison-list li {
+    padding: 12px 0;
+    line-height: 1.6;
+    font-size: 16px;
+    border-bottom: 1px dotted #e0e0e0;
+}
+
+.comparison-list li:last-child {
+    border-bottom: none; /* ბოლო ელემენტს არ აქვს ხაზი */
+}
+
+/* ხატულების ფერები (თუ იყენებთ Font Awesome-ს) */
+.traditional-method li::before {
+    content: '✖'; /* ან fa-times */
+    color: #9e2a2a;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.optivex-innovation li::before {
+    content: '✔'; /* ან fa-check */
+    color: #007bff;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+
+
+/* ======================================================= */
+/* AI ავტომატიზაციის განმარტების ბლოკი */
+/* ======================================================= */
+.section-divider {
+    border: none;
+    height: 2px;
+    background-color: #007bff; /* Optivex ლურჯი ხაზი */
+    margin: 60px auto 40px auto;
+    width: 60%;
+    opacity: 0.2;
+}
+
+.ai-deep-dive {
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #ffffff; /* თეთრი ფონი სექციის ფონზე (f7f9fc) */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    margin-top: 40px;
+    text-align: center;
+}
+
+.ai-deep-dive h2 {
+    font-size: 30px;
+    color: #1e1e1e;
+    margin-bottom: 30px;
+}
+
+.ai-deep-dive .subtitle {
+    font-size: 16px;
+    color: #4a4a4a;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+}
+
+/* სამ-სვეტიანი ბენეფიტების Grid */
+.ai-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+}
+
+@media (max-width: 992px) {
+    .ai-benefits-grid {
+        grid-template-columns: 1fr; /* მობილურზე ერთ სვეტად */
+    }
+}
+
+.ai-benefit-card {
+    padding: 20px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    text-align: left;
+    transition: transform 0.3s ease;
+}
+
+.ai-benefit-card:hover {
+    transform: translateY(-5px); /* მცირე ანიმაცია hover-ზე */
+    box-shadow: 0 8px 15px rgba(0, 123, 255, 0.1);
+}
+
+.ai-benefit-card h4 {
+    color: #007bff;
+    font-size: 18px;
+    margin-bottom: 10px;
+    border-bottom: 1px dotted #e0e0e0;
+    padding-bottom: 8px;
+}
+
+.ai-benefit-card p {
+    font-size: 15px;
+    color: #555;
+}
+
+.cta-statement {
+    margin-top: 40px;
+    padding: 15px;
+    background-color: #f0f7ff;
+    border-radius: 6px;
+    border-left: 5px solid #007bff;
+    font-size: 16px;
+    color: #333;
+}
+
+
+
+/* ======================================================= */
+/* 1. AGENCY PARTNERSHIPS სექციის სტილი */
+/* ======================================================= */
+.partnership-offer {
+    padding: 100px 0;
+    /* ღია ლურჯი ფონი კონტრასტისთვის */
+    background-color: #f0f4ff; 
+    text-align: center;
+}
+
+.partnership-offer h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #1e1e1e;
+}
+
+.partnership-offer .subtitle {
+    font-size: 18px;
+    color: #4a4a4a;
+    margin-bottom: 60px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ======================================================= */
+/* 2. შეთავაზების ბადე (ოთხი სვეტი) */
+/* ======================================================= */
+.offering-grid {
+    display: grid;
+    /* ოთხი თანაბარი სვეტი დესკტოპზე */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto 50px auto;
+}
+
+/* 992px-ზე გადადის ორ სვეტზე */
+@media (max-width: 992px) {
+    .offering-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 600px-ზე გადადის ერთ სვეტზე (მობილური) */
+@media (max-width: 600px) {
+    .offering-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ======================================================= */
+/* 3. შეთავაზების ბარათები */
+/* ======================================================= */
+.offering-card {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 5px solid transparent;
+}
+
+.offering-card:hover {
+    /* ჰოვერზე ოდნავ ამოწევა */
+    transform: translateY(-8px); 
+    box-shadow: 0 12px 25px rgba(0, 123, 255, 0.15);
+    /* ლურჯი ხაზი ჰოვერზე */
+    border-top-color: #007bff; 
+}
+
+.offering-card .icon {
+    display: inline-block;
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.offering-card h4 {
+    font-size: 19px;
+    color: #1e1e1e;
+    margin-bottom: 10px;
+}
+
+.offering-card p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* ======================================================= */
+/* 4. CTA (მოწოდება მოქმედებისკენ) ბლოკი */
+/* ======================================================= */
+.partnership-cta {
+    margin-top: 60px;
+    padding: 30px 40px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 2px solid #007bff;
+    display: inline-block;
+}
+
+.partnership-cta p {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1e1e1e;
+    margin-bottom: 20px;
+}
+
+/* ღილაკის სტილი (თუ იყენებთ სტანდარტულ .btn კლასს) */
+.partnership-cta .btn.primary {
+    /* შეგიძლიათ გადააკეთოთ თქვენი საიტის სტანდარტულ ღილაკზე */
+    font-size: 16px;
+    padding: 12px 30px;
+    text-decoration: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.partnership-cta .btn.primary:hover {
+    background-color: #0056b3;
+}
+
+
+/* ======================================================= */
+/* AI AUTOMATION SERVICE CARD - იდენტური ვიზუალით */
+/* ======================================================= */
+
+.service-card {
+    background-color: #ffffff; /* თეთრი ფონი */
+    padding: 40px 30px;
+    border-radius: 20px; /* დიდი მომრგვალება */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.icon-container {
+    display: inline-block;
+    padding: 15px;
+    border-radius: 50%; /* წრე */
+    background-color: #e6e0f8; /* ღია იასამნისფერი ფონი ხატულისთვის */
+    margin-bottom: 20px;
+}
+
+.service-icon {
+    font-size: 30px;
+}
+
+.card-title {
+    font-size: 24px;
+    color: #5b47a0; /* მუქი იასამნისფერი სათაური */
+    margin-bottom: 15px;
+}
+
+.card-description {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* სიის სტილი (Key Offerings) */
+.key-offerings {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left; /* ჩამონათვალის მარცხნივ გასწორება */
+}
+
+.key-offerings li {
+    font-size: 15px;
+    color: #333;
+    padding: 8px 0;
+    border-top: 1px solid #f0f0f0;
+    line-height: 1.4;
+}
+
+.key-offerings li:first-child {
+    border-top: none;
+}
+
+.key-offerings li::before {
+    content: '★'; /* შეგიძლიათ გამოიყენოთ ✅ ან ● */
+    color: #5b47a0; /* იასამნისფერი ნიშნული */
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+
+
+
+
+/* --- Portfolio Header --- */
+.portfolio-header {
+    text-align: center;
+    padding: 60px 0;
+}
+
+.portfolio-header h1 {
+    font-size: 42px;
+    color: #1e1e1e;
+    margin-bottom: 15px;
+}
+
+/* --- Filter Buttons --- */
+.portfolio-filter {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 50px;
+}
+
+.filter-btn {
+    padding: 10px 25px;
+    border: 1px solid #e0e0e0;
+    background: white;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+.filter-btn.active, .filter-btn:hover {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* --- Project Grid --- */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+}
+
+/* --- Image & Overlay --- */
+.project-image {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 123, 255, 0.85); /* Optivex Blue */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.case-study-link {
+    color: white;
+    text-decoration: none;
+    border: 2px solid white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+/* --- Project Info --- */
+.project-info {
+    padding: 25px;
+}
+
+.category-tag {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #007bff;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.project-info h3 {
+    margin: 10px 0;
+    font-size: 22px;
+}
+
+.project-info p {
+    color: #666;
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tech-stack span {
+    background: #f0f4ff;
+    color: #007bff;
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.project-card {
+    /* ... თქვენი არსებული სტილები ... */
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 1;
+    transform: scale(1);
+}

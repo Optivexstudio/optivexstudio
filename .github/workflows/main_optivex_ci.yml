@@ -1,0 +1,27 @@
+name: Optivex Smart CI
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run AI-Ready Linter (Code Quality Check)
+        run: npm run lint # ეს ამოწმებს კოდის სტილს და შეცდომებს
+
+      - name: Security Scan
+        run: npm audit # ავტომატურად ეძებს უსაფრთხოების ხარვეზებს
