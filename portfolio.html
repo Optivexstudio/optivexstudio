@@ -3,54 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Optivex Studio</title>
+    <title>Portfolio | TiflisByte Digital Agency</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <section class="portfolio-hero">
-        <h1>Digital Assets & Case Studies</h1>
-        <p>Proof of efficiency, automation, and high-end engineering.</p>
-    </section>
+<body class="dark-theme">
 
-    <div class="portfolio-container">
-        <article class="case-study-card">
-            <div class="case-image">
-                <div class="placeholder-img">Smart CI/CD System</div>
-            </div>
-            <div class="case-content">
-                <span class="tag">AI & Automation</span>
-                <h2>Smart CI/CD Infrastructure for Rapid Scaling</h2>
-                <p>We eliminated deployment errors for a team of 15 developers by implementing an AI-driven automated gatekeeper.</p>
-                
-                <div class="results-mini">
-                    <span><strong>0%</strong> Failure Rate</span>
-                    <span><strong>40%</strong> Faster Delivery</span>
+    <nav class="glass-nav">
+        <div class="nav-container">
+            <div class="logo">Tiflis<span>Byte</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                <li><a href="#services">Services</a></li>
+            </ul>
+            <div class="auth-zone">
+                <button id="loginBtn" class="login-btn">Get Started</button>
+                <div id="userProfile" class="user-profile hidden">
+                    <img id="userAvatar" src="" alt="User">
+                    <button id="logoutBtn" class="logout-mini">Logout</button>
                 </div>
-                
-                <a href="#" class="btn-primary">Read Full Story</a>
             </div>
-        </article>
-    </div>
-
-
-    <section class="team-section">
-    <h2 class="section-title">Meet the Architects</h2>
-    <div class="team-grid">
-        <div class="team-card">
-            <div class="member-img">
-                <img src="images/dev-placeholder.jpg" alt="Developer">
-            </div>
-            <h3>Giga S.</h3>
-            <p>Senior Full-Stack Developer</p>
-            <div class="tech-icons">
-                <span>React</span> <span>Node.js</span> <span>AI</span>
-            </div>
-            <a href="#" class="view-works">View Projects</a>
         </div>
+    </nav>
+
+    <main class="portfolio-container">
+        <header class="portfolio-header">
+            <h1 class="reveal-text">Digital Artifacts</h1>
+            <p>High-end engineering meets Tbilisi's creative soul.</p>
+        </header>
+
+        <div class="bento-grid">
+            <div class="bento-item main-case">
+                <div class="bento-content">
+                    <span class="tag">Flagship</span>
+                    <h2>Smart CI/CD Gatekeeper</h2>
+                    <p>Automated deployment pipeline that ensures 0% error rate for enterprise systems.</p>
+                    <div class="tech-row">
+                        <span>GitHub Actions</span> <span>ESLint</span> <span>Vercel</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bento-item ai-block">
+                <div class="bento-content">
+                    <span class="tag">AI & ML</span>
+                    <h3>Neural Audit</h3>
+                    <p>AI-driven code reviewer for TiflisByte internal tools.</p>
+                </div>
+            </div>
+
+            <div class="bento-item stats-block">
+                <div class="bento-content center">
+                    <div class="stat-num">05</div>
+                    <p>Elite Developers</p>
+                </div>
+            </div>
+
+            <div class="bento-item wide-case">
+                <div class="bento-content">
+                    <span class="tag">Security</span>
+                    <h3>AuthVault v2</h3>
+                    <p>Encrypted authentication system integrated with Firebase and Google Cloud.</p>
+                </div>
+            </div>
+
+            <div class="bento-item perf-block">
+                <div class="bento-content center">
+                    <div class="stat-num">99</div>
+                    <p>Lighthouse Score</p>
+                </div>
+            </div>
+
+            <div class="bento-item next-block">
+                <div class="bento-content">
+                    <h3>Incubating Next...</h3>
+                    <p>Confidential Web3 Project</p>
+                </div>
+            </div>
         </div>
-</section>
+    </main>
 
-
-
-    </body>
+    <script type="module" src="app.js"></script>
+</body>
 </html>

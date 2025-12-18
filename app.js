@@ -378,7 +378,7 @@ function handleChatVisibility(user) {
         if (chatContainerMin) chatContainerMin.style.cssText = showStyles;
 
     } else {
-        Tawk_API.hideWidget();
+        Tawk_API.hideWidget(); nhtwsx
         Tawk_API.setAttributes({ 'name': null, 'email': null }, function(error){});
 
         if (chatContainerMax) chatContainerMax.style.cssText = hideStyles;
