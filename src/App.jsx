@@ -1,17 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import './style.css';
-import { auth, googleProvider } from './firebase'; 
+import { 
+  auth, 
+  googleProvider, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  signOut 
+} from './firebase'; 
 import { signInWithPopup } from 'firebase/auth';
+import emailjs from '@emailjs/browser'; // დამატებულია EmailJS
 
 function App() {
   const [filter, setFilter] = useState('all');
   const [view, setView] = useState('home'); 
+  
+  // --- Auth States ---
+  const [isRegistering, setIsRegistering] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  
+  // --- OTP States ---
+  const [generatedOtp, setGeneratedOtp] = useState("");
+  const [userOtp, setUserOtp] = useState("");
 
   // --- ჩატის მართვის ფუნქცია (Tawk.to) ---
   const manageChat = (currentView) => {
     if (window.Tawk_API && window.Tawk_API.onLoad) {
-      if (currentView === 'auth') {
+      if (currentView === 'auth' || currentView === 'verify') {
         window.Tawk_API.hideWidget();
       } else {
         window.Tawk_API.showWidget();
@@ -19,8 +36,8 @@ function App() {
     }
   };
 
-  // ლოგინის ფუნქცია
-  const handleLogin = async () => {
+  // Google Login
+  const handleGoogleLogin = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
       setView('home'); 
@@ -29,38 +46,92 @@ function App() {
     }
   };
 
- // 1. ჩატი გახსნის ფუნქცია
+  // --- OTP გაგზავნის ლოგიკა ---
+  const handleEmailAuth = async (e) => {
+    e.preventDefault();
+    if (isRegistering) {
+      if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+      }
+      
+      // ვაგენერებთ 6-ციფრიან კოდს
+      const otpCode = Math.floor(100000 + Math.random() * 900000).toString();
+      setGeneratedOtp(otpCode);
+
+      // ვაგზავნით EmailJS-ით (ჩაანაცვლე შენი ID-ებით)
+      const templateParams = {
+        to_email: email,
+        otp_code: otpCode
+      };
+
+      emailjs.send(
+        'K1LysGke1TQn2vFYq', // EmailJS Service ID
+        'YOUR_TEMPLATE_ID', // EmailJS Template ID
+        templateParams, 
+        'YOUR_PUBLIC_KEY' // EmailJS Public Key
+      )
+      .then(() => {
+        alert("Verification code sent to " + email);
+        setView('verify'); // გადავდივართ კოდის შეყვანის გვერდზე
+      })
+      .catch((err) => {
+        console.error("EmailJS Error:", err);
+        alert("Failed to send code. Please try again.");
+      });
+
+    } else {
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        setView('home');
+      } catch (err) {
+        alert("Invalid credentials.");
+      }
+    }
+  };
+
+  // --- OTP შემოწმება და რეგისტრაცია ---
+  const verifyAndRegister = async () => {
+    if (userOtp === generatedOtp) {
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        alert("Account verified and created successfully!");
+        setView('home');
+      } catch (err) {
+        alert(err.message);
+      }
+    } else {
+      alert("Invalid 6-digit code! Please check your email.");
+    }
+  };
+
   const openSupportChat = (e) => {
     e.preventDefault();
     if (window.Tawk_API && typeof window.Tawk_API.showWidget === 'function') {
       window.Tawk_API.showWidget(); 
       window.Tawk_API.maximize();   
     } else {
-      alert("ჩატი იტვირთება, გთხოვთ სცადოთ 2 წამში ისევ.");
+      alert("The chat is loading, please try again in 2 seconds.");
     }
   };
 
   useEffect(() => {
-    // 2. Tawk.to სკრიპტის ინექცია (ახალი სწორი ლინკით)
     if (!document.getElementById('tawk-script')) {
       var s1 = document.createElement("script"),
           s0 = document.getElementsByTagName("script")[0];
       s1.id = 'tawk-script';
       s1.async = true;
-      // აქ ჩაჯდა შენი ახალი ID
       s1.src = 'https://embed.tawk.to/69349bbb07cc551984368bf6/1jbqo0lgf'; 
       s1.charset = 'UTF-8';
       s1.setAttribute('crossorigin', '*');
       s0.parentNode.insertBefore(s1, s0);
     }
 
-    // 3. ჩატვირთვისას დავმალოთ ვიჯეტი
     window.Tawk_API = window.Tawk_API || {};
     window.Tawk_API.onLoad = function() {
       window.Tawk_API.hideWidget();
     };
 
-    // 4. Reveal ანიმაცია
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('revealed');
@@ -69,23 +140,91 @@ function App() {
     document.querySelectorAll('.revealer').forEach(el => observer.observe(el));
   }, []);
 
-  // --- AUTH PAGE VIEW ---
+  // --- 1. VERIFICATION VIEW (NEW) ---
+  if (view === 'verify') {
+    return (
+      <div className="site-wrapper">
+        <Navbar onLoginClick={() => setView('auth')} onHomeClick={() => setView('home')} />
+        <section className="auth-page-section container" style={{paddingTop: '150px', minHeight: '80vh'}}>
+          <div className="cta-wrap">
+            <h2 className="section-title">Verify Your Email</h2>
+            <p className="cta-message">Enter the 6-digit code sent to <strong>{email}</strong></p>
+            <div className="form-container">
+                <input 
+                  type="text" 
+                  className="otp-input"
+                  maxLength="6"
+                  placeholder="0 0 0 0 0 0"
+                  onChange={(e) => setUserOtp(e.target.value)}
+                />
+                <button className="btn primary full-width-btn" onClick={verifyAndRegister}>
+                  Verify & Register
+                </button>
+                <p className="auth-toggle-text" onClick={() => setView('auth')}>
+                  Wrong email? <span>Go back</span>
+                </p>
+            </div>
+          </div>
+        </section>
+        <footer>© 2025 Optivex Studio</footer>
+      </div>
+    );
+  }
+
+  // --- 2. AUTH VIEW (LOGIN/REGISTER) ---
   if (view === 'auth') {
     return (
       <div className="site-wrapper">
         <Navbar onLoginClick={() => setView('auth')} onHomeClick={() => setView('home')} />
         <section className="auth-page-section container" style={{paddingTop: '150px', minHeight: '80vh'}}>
-          <div className="cta-wrap" style={{maxWidth: '500px', margin: '0 auto'}}>
-            <h2 className="section-title">Welcome to Tiflisbyte</h2>
-            <p className="cta-message">Join our elite network of digital innovators.</p>
+          <div className="cta-wrap">
+            <h2 className="section-title">
+              {isRegistering ? "Create Account" : "Welcome Back"}
+            </h2>
+            <p className="cta-message">
+              {isRegistering ? "Join our elite network of innovators." : "Join our elite network of digital innovators."}
+            </p>
             <div className="form-container">
-                <button className="btn primary google-btn" style={{width: '100%', marginBottom: '20px'}} onClick={handleLogin}>
+                <button className="btn primary google-btn" style={{width: '100%', marginBottom: '20px'}} onClick={handleGoogleLogin}>
                     Continue with Google
                 </button>
                 <div className="separator"><span>OR</span></div>
-                <input type="email" placeholder="Email Address" style={{width: '100%', padding: '12px', marginBottom: '10px', borderRadius: '8px', border: '1px solid #ddd'}} />
-                <input type="password" placeholder="Password" style={{width: '100%', padding: '12px', marginBottom: '15px', borderRadius: '8px', border: '1px solid #ddd'}} />
-                <button className="btn primary full-width-btn" style={{width: '100%'}}>Login / Create Account</button>
+                
+                <form onSubmit={handleEmailAuth} style={{width: '100%'}}>
+                  <input 
+                    type="email" 
+                    placeholder="Email Address" 
+                    required
+                    className="auth-input"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <input 
+                    type="password" 
+                    placeholder="Password" 
+                    required
+                    className="auth-input"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  
+                  {isRegistering && (
+                    <input 
+                      type="password" 
+                      placeholder="Confirm Password" 
+                      required
+                      className="auth-input"
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                  )}
+
+                  <button type="submit" className="btn primary full-width-btn" style={{width: '100%'}}>
+                    {isRegistering ? "Send Verification Code" : "Login"}
+                  </button>
+                </form>
+
+                <p className="auth-toggle-text" onClick={() => setIsRegistering(!isRegistering)}>
+                  {isRegistering ? "Already have an account? Login" : "Don't have an account? Register here"}
+                </p>
+
                 <button className="btn ghost" style={{marginTop: '20px', width: '100%'}} onClick={() => setView('home')}>← Back to Home</button>
             </div>
           </div>
@@ -95,7 +234,7 @@ function App() {
     );
   }
 
-  // --- MAIN LANDING PAGE VIEW ---
+  // --- 3. HOME VIEW ---
   return (
     <div className="site-wrapper">
       <Navbar onLoginClick={() => setView('auth')} onHomeClick={() => setView('home')} />

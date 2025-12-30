@@ -2092,8 +2092,152 @@ iframe[title="chat widget"] {
     display: block !important;
 }
 
-.tawk-minimized-container {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+
+
+
+
+/* --- TIFLISBYTE PREMIUM AUTH & OTP STYLES --- */
+
+.auth-page-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #0a0a0a;
+    padding: 100px 20px 60px;
+}
+
+.cta-wrap {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* თეთრი ბარათი */
+.form-container {
+    background: #ffffff;
+    width: 100%;
+    padding: 40px;
+    border-radius: 28px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- OTP (6-ციფრიანი კოდის) სტილი --- */
+.otp-input {
+    width: 100% !important;
+    max-width: 300px !important;
+    height: 70px;
+    font-size: 36px !important;
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: 15px; /* ციფრებს შორის დაშორება */
+    background: #f1f3f5 !important;
+    border: 2px solid #6366f1 !important;
+    color: #1a1a1a !important;
+    border-radius: 16px;
+    margin: 20px auto;
+    display: block;
+}
+
+.otp-input:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.3) !important;
+    background: #ffffff !important;
+}
+
+/* --- ჩვეულებრივი ინპუტები (Email/Password) --- */
+.auth-input {
+    width: 100%;
+    padding: 16px 20px;
+    margin-bottom: 15px;
+    background: #f1f3f5;
+    border: 2px solid transparent;
+    border-radius: 14px;
+    color: #1a1a1a !important; /* მუქი ტექსტი, რომ გამოჩნდეს */
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.auth-input:focus {
+    outline: none;
+    border-color: #6366f1;
+    background: #ffffff;
+}
+
+/* --- გამყოფი (OR) --- */
+.separator {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 25px 0;
+    color: #adb5bd;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e9ecef;
+}
+
+.separator span {
+    padding: 0 15px;
+}
+
+/* --- ღილაკები --- */
+.full-width-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    padding: 16px !important;
+    border-radius: 14px !important;
+    border: none !important;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+    transition: 0.3s ease;
+}
+
+.full-width-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(99, 102, 241, 0.4);
+}
+
+.google-btn {
+    width: 100%;
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 14px !important;
+    padding: 14px !important;
+    font-weight: 600 !important;
+}
+
+/* --- ტექსტური ბმულები --- */
+.auth-toggle-text {
+    margin-top: 20px;
+    color: #6c757d;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.auth-toggle-text span {
+    color: #6366f1;
+    font-weight: 700;
+}
+
+.auth-toggle-text span:hover {
+    text-decoration: underline;
 }
