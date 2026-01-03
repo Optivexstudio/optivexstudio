@@ -1,7 +1,7 @@
 {
   "name": "tiflisbyte",
   "version": "1.0.0",
-  "description": "TiflisByte Digital Agency - Engineering the Future of Tbilisi",
+  "description": "Nevarix Digital Agency - Engineering the Future of Tbilisi",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,18 +10,20 @@
     "preview": "vite preview"
   },
   "keywords": [
-    "TiflisByte",
+    "Nevarix",
     "Digital Agency",
     "Tbilisi",
     "Software Development"
   ],
-  "author": "TiflisByte Team",
+  "author": "Nevarix Team",
   "license": "ISC",
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "firebase": "^12.7.0",
+    "lucide-react": "^0.562.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.11.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
