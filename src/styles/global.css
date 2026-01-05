@@ -2669,5 +2669,244 @@ iframe[title="chat widget"] {
 }
 
 
+/* ===== AUTH PAGES FIX ===== */
+.auth-page-section{
+  padding-top: 110px !important;   /* 150px ბევრია, ქვემოთ წევს */
+  padding-bottom: 80px;
+  min-height: calc(100vh - 110px);
+  display: flex;
+  align-items: flex-start;          /* ზედიდან დაიწყოს */
+  justify-content: center;
+}
 
+.auth-page-section .cta-wrap{
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.form-container{
+  width: 100%;
+  margin-top: 18px;
+}
+
+/* ===== AUTH INPUT: VALUE ALWAYS WHITE ===== */
+
+.auth-input,
+.otp-input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.14);
+
+  background: #111827;            /* მუქი ლურჯ-შავი */
+  color: #ffffff !important;       /* ✅ რაც ჩაწერე ყოველთვის თეთრია */
+  caret-color: #ffffff;
+
+  font-size: 16px;
+  outline: none;
+
+  transition: 
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+/* Placeholder ცალკე */
+.auth-input::placeholder,
+.otp-input::placeholder {
+  color: rgba(255,255,255,0.45) !important;
+}
+
+/* Focus-ზე ოდნავ highlight (მაგრამ ტექსტი ისევ თეთრი დარჩება) */
+.auth-input:focus,
+.otp-input:focus {
+  border-color: rgba(99,102,241,0.85);
+  box-shadow: 0 0 0 4px rgba(99,102,241,0.18);
+  background: #0f172a;            /* ოდნავ სხვა მუქი, თეთრი არა */
+  color: #ffffff !important;
+}
+
+/* Hover უბრალოდ border */
+.auth-input:hover,
+.otp-input:hover {
+  border-color: rgba(255,255,255,0.28);
+}
+
+/* Chrome autofill რომ არ დაგიბლოკოს ფერები */
+input.auth-input:-webkit-autofill,
+input.otp-input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #111827 inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #ffffff !important;
+}
+
+.google-icon {
+    width: 50px;
+}
+
+.auth-provider-btn{
+  width:100%;
+  height:54px;
+  border-radius:14px;
+  border:1px solid rgba(0,0,0,.12);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  font-weight:700;
+  cursor:pointer;
+  margin-top: 12px;
+}
+
+.auth-provider-btn.github{ background:#0f0f0f; color:#fff; border-color: rgba(255,255,255,.12); }
+.auth-provider-btn.apple{ background:#000; color:#fff; border-color: rgba(255,255,255,.12); }
+.provider-icon{ display:flex; align-items:center; justify-content:center; }
+
+ 
+.nvx-modal-backdrop{
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 12, 18, .55);
+  backdrop-filter: blur(8px);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  z-index: 9999;
+}
+
+.nvx-modal{
+  width: min(520px, 100%);
+  background: rgba(18, 22, 34, .92);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.45);
+  padding: 18px;
+  color: #fff;
+  animation: nvxPop .18s ease-out;
+}
+
+@keyframes nvxPop {
+  from { transform: translateY(8px) scale(.98); opacity: .6; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.nvx-modal-head{
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.nvx-modal-badge{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+}
+
+.nvx-modal h3{
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.nvx-modal-sub{
+  margin: 6px 0 0;
+  color: rgba(255,255,255,.72);
+  font-size: 14px;
+}
+
+.nvx-modal-body{
+  margin-top: 14px;
+}
+
+.nvx-info{
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  color: rgba(255,255,255,.88);
+  font-size: 14px;
+}
+
+.nvx-info .dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #7c5cff;
+  margin-top: 4px;
+  flex: 0 0 auto;
+}
+
+.nvx-modal-actions{
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+@media (max-width: 520px){
+  .nvx-modal-actions{
+    flex-direction: column;
+  }
+}
+
+.close {
+    color: white;
+}
+
+.nvx-modal-badge.apple-logo{
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, #111, #000);
+  border: 1px solid rgba(255,255,255,.15);
+  color: #fff;
+}
+/* Close / Cancel button — hover FIX */
+.nvx-modal-actions .btn.ghost {
+  background: transparent !important;
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* hover / focus / active — საერთოდ აღარ თეთრდება */
+.nvx-modal-actions .btn.ghost:hover,
+.nvx-modal-actions .btn.ghost:focus,
+.nvx-modal-actions .btn.ghost:active {
+  background: transparent !important;
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: none !important;
+}
+
+.auth-error{
+  margin: 12px 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 70, 70, 0.10);
+  border: 1px solid rgba(255, 70, 70, 0.25);
+  color: #fff;
+  font-size: 14px;
+}
+
+.auth-success{
+  margin: 12px 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(70, 255, 160, 0.10);
+  border: 1px solid rgba(70, 255, 160, 0.20);
+  color: #fff;
+  font-size: 14px;
+}
 
