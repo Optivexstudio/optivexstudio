@@ -8,17 +8,24 @@ import NotFound from "./pages/NotFound";
 import Support from "./pages/Support";
 import SupportTopic from "./pages/SupportTopic";
 
+import LanguageSwitcher from "./components/LanguageSwitcher";
+
 export default function App() {
   return (
     <BrowserRouter>
+      {/* 🌐 Language Switcher – fixed top-right */}
+      <div className="nvx-lang-wrapper">
+        <LanguageSwitcher />
+      </div>
+
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/verify" element={<Verify />} />
-          <Route path="*" element={<NotFound />} />
           <Route path="/support" element={<Support />} />
           <Route path="/support/:topic" element={<SupportTopic />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

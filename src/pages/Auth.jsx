@@ -8,7 +8,7 @@ import {
   signInWithEmailAndPassword,
 } from "../lib/firebase.js";
 
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, fetchSignInMethodsForEmail } from "firebase/auth";
 import emailjs from "@emailjs/browser";
 
 export default function Auth() {
@@ -30,9 +30,6 @@ export default function Auth() {
   const [emailError, setEmailError] = useState("");
   const [emailInfo, setEmailInfo] = useState("");
 
-  // OTP (რეგისტრაციისთვის)
-  const [generatedOtp, setGeneratedOtp] = useState("");
-
   // ✅ Provider login (Google/GitHub)
   const handleProviderLogin = async (provider) => {
     if (providerLoading) return; // anti double click
@@ -45,18 +42,15 @@ export default function Auth() {
     } catch (err) {
       console.error("Provider login error:", err);
 
-      // ✅ ესენი ჩვეულებრივი popup error-ებია — არ ვაჩვენებთ alert-ით
       if (
         err?.code === "auth/cancelled-popup-request" ||
         err?.code === "auth/popup-closed-by-user"
       ) {
-        setProviderLoading(false);
         return;
       }
 
       if (err?.code === "auth/popup-blocked") {
         setProviderError("Popup was blocked. Please allow popups and try again.");
-        setProviderLoading(false);
         return;
       }
 
@@ -73,10 +67,17 @@ export default function Auth() {
     setEmailError("");
     setEmailInfo("");
 
+    const cleanEmail = email.trim().toLowerCase();
+
+    if (!cleanEmail) {
+      setEmailError("Please enter a valid email.");
+      return;
+    }
+
     // LOGIN
     if (!isRegistering) {
       try {
-        await signInWithEmailAndPassword(auth, email, password);
+        await signInWithEmailAndPassword(auth, cleanEmail, password);
         navigate("/");
       } catch (err) {
         console.error(err);
@@ -94,34 +95,48 @@ export default function Auth() {
     if (sendingCode) return;
     setSendingCode(true);
 
-    const otpCode = Math.floor(100000 + Math.random() * 900000).toString();
-    setGeneratedOtp(otpCode);
-
     try {
-      // ⚠️ EmailJS config (თუ არ გაქვს, არ დაიკრას alert)
-      const SERVICE_ID = "service_cync1qb";
-      const TEMPLATE_ID = "template_chmnh8c";
-      const PUBLIC_KEY = "K1LysGke1TQn2vFYq";
+      // ✅ 1) CHECK IF EMAIL EXISTS BEFORE OTP
+      const methods = await fetchSignInMethodsForEmail(auth, cleanEmail);
 
-      // ✅ თუ არ არის დაკონფიგურებული — ლამაზად დავწეროთ და გავჩერდეთ
-      if (TEMPLATE_ID.includes("YOUR_") || PUBLIC_KEY.includes("YOUR_")) {
+      // თუ methods არის ცარიელი => user არ არსებობს
+      // თუ არის რამე => user უკვე რეგისტრირებულია (password/google/github...)
+      if (methods.length > 0) {
+        setEmailError("This email is already registered. Please login.");
+        setEmailInfo("");
+        setIsRegistering(false);
+        setSendingCode(false);
+        return;
+      }
+
+      // ✅ 2) Generate OTP ONLY if email is not registered
+      const otpCode = Math.floor(100000 + Math.random() * 900000).toString();
+
+      // ✅ EmailJS config ENV-იდან
+      const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_OTP_TEMPLATE_ID;
+      const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+      if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
         setEmailError(
           "Email verification is not configured yet. Please use Google/GitHub for registration for now."
         );
         return;
       }
 
+      // ✅ 3) Send OTP
       await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,
-        { to_email: email, otp_code: otpCode },
+        { to_email: cleanEmail, otp_code: otpCode },
         PUBLIC_KEY
       );
 
-      setEmailInfo("Verification code sent to " + email);
+      setEmailInfo("Verification code sent to " + cleanEmail);
 
+      // ✅ 4) Navigate to verify page
       navigate("/verify", {
-        state: { email, password, generatedOtp: otpCode },
+        state: { email: cleanEmail, password, generatedOtp: otpCode },
       });
     } catch (err) {
       console.error("Email/OTP error:", err);
@@ -148,7 +163,7 @@ export default function Auth() {
           </p>
 
           <div className="form-container">
-            {/* ✅ Provider errors (no alert) */}
+            {/* Provider errors */}
             {providerError && <div className="auth-error">{providerError}</div>}
 
             {/* Google */}
@@ -220,7 +235,7 @@ export default function Auth() {
               <span>OR</span>
             </div>
 
-            {/* ✅ Email errors/info */}
+            {/* Email errors/info */}
             {emailError && <div className="auth-error">{emailError}</div>}
             {emailInfo && <div className="auth-success">{emailInfo}</div>}
 
@@ -293,7 +308,7 @@ export default function Auth() {
         </div>
       </section>
 
-      {/* ✅ Apple modal */}
+      {/* Apple modal */}
       {showAppleModal && (
         <div
           className="nvx-modal-backdrop"
@@ -357,7 +372,7 @@ export default function Auth() {
         </div>
       )}
 
-      <footer>© 2025 Optivex Studio</footer>
+      <footer>© {new Date().getFullYear()} Nevarix Studio</footer>
     </>
   );
 }

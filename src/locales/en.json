@@ -1,0 +1,264 @@
+{
+  "hero": {
+    "title": "Nevarix Studio",
+    "subtitleStrong": "We build custom, fast and maintainable websites using HTML • CSS • JavaScript.",
+    "subtitleLine": "Focused on performance, accessibility and real business results.",
+    "ctaProjects": "See Projects",
+    "ctaQuote": "Request Quote"
+  },
+  "about": {
+    "title": "Nevarix Studio — Engineering Digital Excellence",
+    "lead": "Nevarix Studio is a Georgia-based collective of seasoned software engineers and designers dedicated to transforming ambitious visions into high-performance digital realities. We operate with a global perspective, delivering bespoke web and mobile applications that set new industry standards for speed, security, and scalability.",
+    "p1": "We move beyond traditional development by embracing a modern, API-first approach. Our expertise lies in leveraging technologies like Headless CMS architecture, Serverless computing (AWS/Firebase), and cutting-edge JavaScript frameworks (React/Vue). This strategy ensures every product we build is future-proof, easily maintainable, and highly optimized for performance metrics.",
+    "p2": "Whether it's a complex enterprise platform or a high-traffic e-commerce solution, our focus remains on providing clear communication and transparent milestones. We don't just write code; we engineer solutions that generate tangible business value.",
+    "pillarsTitle": "Our Core Engineering Pillars",
+    "pillar1": "Performance First: Commitment to sub-second load times and 90+ PageSpeed scores.",
+    "pillar2": "Scalability & Security: Utilizing microservices and cloud infrastructure for robust growth.",
+    "pillar3": "Transparent Process: Agile methodology with client involvement at every iteration.",
+    "pillar4": "Maintenance-Ready Code: Delivering clean, semantic, and well-documented codebase."
+  },
+
+"nav": {
+  "aria": "Main navigation",
+  "openMenu": "Open menu",
+  "services": "Services",
+  "automation": "Automation",
+  "projects": "Projects",
+  "faq": "FAQ",
+  "support": "Support",
+  "auth": "Register / Login",
+  "logout": "Logout",
+  "contact": "Contact Us"
+}
+,
+
+
+"services": {
+  "title": "Our Core Service Offerings",
+  "subtitle": "We translate complex engineering challenges into market-ready digital products that perform.",
+
+  "web": {
+    "title": "High-Performance Web Platforms",
+    "desc": "We build scalable, secure, and fast websites from scratch, focusing on SEO, accessibility (a11y), and Lighthouse scores (90+). Perfect for corporate sites, e-commerce, and SaaS platforms.",
+    "li1": "React & Vue Frontends",
+    "li2": "Headless CMS Architecture",
+    "li3": "API Integration & Optimization"
+  },
+
+  "mobile": {
+    "title": "Native Mobile App Development",
+    "desc": "Delivering exceptional UX and performance for both iOS and Android. Our native approach ensures maximum speed and reliability, integrating complex features like payments and location services.",
+    "li1": "Swift (iOS) & Kotlin (Android)",
+    "li2": "Cross-Platform (Flutter)",
+    "li3": "App Store/Play Store Deployment"
+  },
+
+  "cloud": {
+    "title": "Cloud, Serverless, & Backend APIs",
+    "desc": "Robust and maintainable backend systems built for long-term growth. We use serverless technologies to reduce costs and increase scalability, ensuring your application can handle millions of users.",
+    "li1": "Firebase / Google Cloud",
+    "li2": "Custom NodeJS REST APIs",
+    "li3": "Database Design & Security"
+  },
+
+  "ai": {
+    "title": "AI Automation & CI/CD Optimization",
+    "desc": "We integrate cutting-edge AI and CI/CD pipelines directly into your existing development workflow. This service dramatically boosts project efficiency, guaranteeing faster time-to-market and predictable, high-quality releases.",
+    "li1": "Automated Code Review & Testing",
+    "li2": "CI/CD Pipeline Setup (GitHub Actions, GitLab, etc.)",
+    "li3": "Zero-Downtime Deployment Configuration",
+    "li4": "AI-Driven Security Vulnerability Scanning",
+    "li5": "Resource Allocation Optimization"
+  }
+},
+
+
+"automation": {
+  "title": "Business Automation Suite",
+  "subtitle": "One system for clients, invoices, payment reminders and AI-powered content publishing.",
+
+  "ctaDemo": "Request a Demo",
+  "ctaPricing": "Get Pricing",
+
+  "cards": {
+    "crm": {
+      "title": "Client & Deal Management",
+      "desc": "Manage clients, deal statuses, notes and next actions in one clean dashboard."
+    },
+    "invoices": {
+      "title": "Invoices & Payments",
+      "desc": "Create invoices, track payments and monitor overdue balances in real time."
+    },
+    "reminders": {
+      "title": "Automated Reminders",
+      "desc": "Automatic reminders for overdue payments via Email, SMS or WhatsApp."
+    },
+    "ai": {
+      "title": "AI Content Publishing",
+      "desc": "AI generates and publishes 2–3 posts per day based on your business tone and goals."
+    }
+  },
+
+  "flow": {
+    "title": "How It Works",
+    "subtitle": "A fully automated loop with optional approval before publishing.",
+    "step1": "Collect: clients, invoices, due dates and business profile",
+    "step2": "Automate: overdue checks and scheduled reminders",
+    "step3": "Generate: AI creates content based on your services",
+    "step4": "Publish: auto-post or approve before publishing",
+    "step5": "Track: logs, history and performance insights"
+  },
+
+  "trust1": "✅ Secure authentication and role-based access",
+  "trust2": "✅ Clean audit logs with full action history",
+  "trust3": "✅ Supports Georgian and English content"
+},
+
+
+
+  "workflow": {
+    "title": "How We Work",
+    "steps": {
+      "s1Title": "1. Quick Discovery",
+      "s1Desc": "We collect goals and success metrics. 20-minute intake to assess scope and timeline.",
+      "s2Title": "2. Proposal & Milestones",
+      "s2Desc": "We deliver a clear scope with milestones and a fixed price. No surprises.",
+      "s3Title": "3. Build & Review",
+      "s3Desc": "Iterative delivery — review checkpoints, QA and accessibility checks.",
+      "s4Title": "4. Launch & Monitor",
+      "s4Desc": "Deployment, performance checks, and optional monitoring/maintenance.",
+      "s5Title": "5. Support",
+      "s5Desc": "Monthly maintenance and small updates — optional retainer plans available."
+    }
+  },
+
+  "projects": {
+    "title": "Our Digital Assets",
+    "subtitle": "Explore how we combine AI automation with premium development to solve real business challenges.",
+    "filters": {
+      "all": "ALL",
+      "web": "WEB",
+      "ai": "AI",
+      "software": "SOFTWARE"
+    },
+    "card": {
+      "link": "View Case Study",
+      "tag": "Web Dev + AI",
+      "title": "E-commerce Automation Hub",
+      "desc": "Reduced manual order processing time by 60% through custom AI pipelines.",
+      "stack": {
+        "s1": "React",
+        "s2": "Node.js",
+        "s3": "Python AI"
+      },
+      "imgAlt": "E-commerce Project"
+    }
+  },
+
+  "clients": {
+    "title": "Who We Work With",
+    "subtitle": "We partner with teams that need fast delivery, clean architecture, and reliable long-term maintenance.",
+    "cards": {
+      "c1Badge": "Startups & MVPs",
+      "c1Title": "Startups & MVP Founders",
+      "c1Desc": "Launch quickly with a scalable foundation — from landing pages to full web apps.",
+
+      "c2Badge": "Small Business",
+      "c2Title": "Small Businesses",
+      "c2Desc": "High-performance websites that convert visitors into leads and customers.",
+
+      "c3Badge": "SaaS Teams",
+      "c3Title": "SaaS Products",
+      "c3Desc": "Feature development, UI polish, auth systems, and performance optimization.",
+
+      "c4Badge": "Agencies",
+      "c4Title": "Agencies & Studios",
+      "c4Desc": "Your technical partner for overflow work, complex builds, and delivery support."
+    },
+    "stack": {
+      "title": "Our Core Technology Stack",
+      "desc": "We build maintainable products using modern tools — optimized for speed, SEO, and scale.",
+      "li1": "Frontend: React + Vite, modern HTML/CSS, accessibility-first UI",
+      "li2": "Backend: Firebase / Serverless, REST APIs, secure auth flows",
+      "li3": "Delivery: CI/CD, automated testing, performance monitoring",
+      "li4": "Quality: Clean code, documentation, maintainability"
+    }
+  },
+
+  "contrast": {
+    "title": "The Nevarix Studio Contrast: Efficiency Meets Innovation",
+    "subtitle": "Tired of slow delivery and unpredictable costs? See how our AI-driven automation delivers superior results.",
+    "leftTitle": "Other Agencies: Manual & Costly",
+    "left": {
+      "li1": "❌ Slow Time-to-Market: Reliance on manual processes leads to extended cycles.",
+      "li2": "❌ Unpredictable Budgeting: High overhead costs due to extensive human hours.",
+      "li3": "❌ Inconsistent Quality: Susceptibility to human error in coding and testing.",
+      "li4": "❌ Scalability Roadblocks: Expanding requires costly, dedicated engineering time."
+    },
+    "rightTitle": "Nevarix Studio: AI-Driven & Optimized",
+    "right": {
+      "li1": "✅ Accelerated Delivery: 40% Faster Time-to-Market through automated pipelines.",
+      "li2": "✅ Cost Optimization: AI processes reduce human dependency and overall costs.",
+      "li3": "✅ Zero-Defect Reliability: Automated QA ensure consistent, high-quality output.",
+      "li4": "✅ Effortless Scaling: Cloud-native architecture supports seamless scaling."
+    }
+  },
+
+  "faq": {
+    "title": "Common Questions & Our Guarantee",
+    "leftTitle": "Frequently Asked Questions",
+    "q1": {
+      "title": "1. What is your primary tech stack?",
+      "desc": "We primarily use Vanilla JavaScript (ES6+), React, and modern CSS/HTML5 for frontend development. For mobile, we focus on Swift (iOS), Kotlin (Android), and Flutter (Dart). Our backend services often rely on Firebase, AWS, or custom NodeJS/Express APIs."
+    },
+    "q2": {
+      "title": "2. How do you handle project pricing?",
+      "desc": "We work almost exclusively with fixed-price contracts based on an agreed-upon scope of work and milestones. This eliminates surprise costs and guarantees transparency. We provide a detailed quote after the discovery call."
+    },
+    "q3": {
+      "title": "3. What about post-launch maintenance?",
+      "desc": "Every project includes a 30-day bug-fix warranty after launch. For ongoing support, security monitoring, and content updates, we offer flexible monthly retainer packages."
+    },
+    "rightTitle": "Our Core Project Guarantee",
+    "guarantee": {
+      "title": "Zero-Risk Development",
+      "desc": "We guarantee to deliver a 100% responsive, well-documented, and clean codebase tailored specifically to your business needs. If the delivered project does not match the final agreed-upon scope, we will revise it at no extra cost.",
+      "li1": "Fixed Pricing & Clear Milestones",
+      "li2": "Dedicated 24/7 Support Channel",
+      "li3": "Lifetime Bug Fix Warranty"
+    }
+  },
+
+  "contact": {
+    "title": "Start a Project",
+    "subtitle": "Choose how you want to contact us — quick chat, Telegram, or send full details by email.",
+    "email": {
+      "title": "📩 Send Details (Email)",
+      "subtitle": "Best option if you want pricing + timeline. We reply fast."
+    },
+    "telegram": {
+      "title": "📲 Telegram",
+      "subtitle": "Prefer Telegram? Message us directly.",
+      "btn": "Open Telegram",
+      "label": "Telegram:"
+    },
+    "chat": {
+      "title": "💬 Live Chat",
+      "subtitle": "Want quick questions & answers? Chat with us now.",
+      "btn": "Open Live Chat",
+      "note": "If we’re offline, use the email form — we’ll respond ASAP."
+    }
+  },
+
+  "footer": {
+    "text": "Nevarix Studio — Crafted with clean code"
+  }
+}
+
+
+
+
+  
+
+
+

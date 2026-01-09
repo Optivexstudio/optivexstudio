@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { auth } from "../lib/firebase.js";
-
-
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "../components/LanguageSwitcher";
 
 const Navbar = () => {
+  // ✅ keyPrefix უკვე გაქვს, ამიტომ t("services") და ა.შ.
+  const { t } = useTranslation("", { keyPrefix: "nav" });
+
   const [user, setUser] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -20,29 +23,29 @@ const Navbar = () => {
     return () => unsubscribe();
   }, []);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleMenu = () => setIsMenuOpen((p) => !p);
 
   // Home-ზე სექციაზე გადასვლა (თუ სხვა გვერდზე ხარ, ჯერ Home, მერე scroll)
   const goToSection = (hash) => {
     setIsMenuOpen(false);
 
     if (location.pathname !== "/") {
-      // ჯერ Home-ზე გადადი და state-ში გადავეცით სად უნდა ჩასქროლოს
       navigate("/", { state: { scrollTo: hash } });
       return;
     }
 
-    // უკვე Home-ზე ხარ -> პირდაპირ scroll
     const el = document.querySelector(hash);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   const goHomeTop = () => {
     setIsMenuOpen(false);
+
     if (location.pathname !== "/") {
       navigate("/");
       return;
     }
+
     const el = document.querySelector("#hero");
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
@@ -50,6 +53,11 @@ const Navbar = () => {
   const goAuth = () => {
     setIsMenuOpen(false);
     navigate("/auth");
+  };
+
+  const goSupport = () => {
+    setIsMenuOpen(false);
+    navigate("/support");
   };
 
   const handleLogout = async () => {
@@ -60,7 +68,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav aria-label="Main navigation">
+    <nav aria-label={t("aria")}>
       <div className="nav-container">
         {/* ლოგო -> Home (hero) */}
         <a
@@ -74,16 +82,22 @@ const Navbar = () => {
           Nevarix
         </a>
 
-        <button
-          id="burger"
-          className={`burger ${isMenuOpen ? "active" : ""}`}
-          aria-label="Open menu"
-          onClick={toggleMenu}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+        {/* ✅ აქ დავამატე wrapper რომ LanguageSwitcher + Burger გვერდიგვერდ იყოს */}
+        <div className="nav-actions">
+        
+
+          <button
+            id="burger"
+            className={`burger ${isMenuOpen ? "active" : ""}`}
+            aria-label={t("openMenu")}
+            onClick={toggleMenu}
+            type="button"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
 
         <div id="nav-menu" className={`nav-list ${isMenuOpen ? "open" : ""}`}>
           <a
@@ -93,7 +107,17 @@ const Navbar = () => {
               goToSection("#services");
             }}
           >
-            Services
+            {t("services")}
+          </a>
+
+          <a
+            href="#automation"
+            onClick={(e) => {
+              e.preventDefault();
+              goToSection("#automation");
+            }}
+          >
+            {t("automation")}
           </a>
 
           <a
@@ -103,7 +127,7 @@ const Navbar = () => {
               goToSection("#projects");
             }}
           >
-            Projects
+            {t("projects")}
           </a>
 
           <a
@@ -113,8 +137,21 @@ const Navbar = () => {
               goToSection("#faq");
             }}
           >
-            FAQ
+            {t("faq")}
           </a>
+
+          {/* ✅ Support მხოლოდ დალოგინებულზე */}
+          {user && (
+            <a
+              href="/support"
+              onClick={(e) => {
+                e.preventDefault();
+                goSupport();
+              }}
+            >
+              {t("support")}
+            </a>
+          )}
 
           {!user ? (
             <a
@@ -125,25 +162,26 @@ const Navbar = () => {
                 goAuth();
               }}
             >
-              Register / Login
+              {t("auth")}
             </a>
           ) : (
             <div className="auth-control">
               <button
                 className="user-email-btn"
-                onClick={() => setShowDropdown(!showDropdown)}
+                onClick={() => setShowDropdown((p) => !p)}
+                type="button"
               >
                 {user.email?.split("@")[0]}
               </button>
-              
 
               {showDropdown && (
                 <div className="dropdown-content" style={{ display: "block" }}>
                   <button
                     className="btn small-btn logout-red-btn"
                     onClick={handleLogout}
+                    type="button"
                   >
-                    Logout
+                    {t("logout")}
                   </button>
                 </div>
               )}
@@ -158,7 +196,7 @@ const Navbar = () => {
               goToSection("#contact");
             }}
           >
-            Contact Us
+            {t("contact")}
           </a>
         </div>
       </div>

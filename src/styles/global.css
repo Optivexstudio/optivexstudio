@@ -2910,3 +2910,214 @@ input.otp-input:-webkit-autofill {
   font-size: 14px;
 }
 
+.nvx-contact-grid{
+  display:grid;
+  grid-template-columns: 1.4fr 0.8fr 0.8fr;
+  gap: 18px;
+  align-items:start;
+}
+
+.nvx-contact-card{
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 18px;
+  backdrop-filter: blur(8px);
+}
+
+.nvx-contact-card-title{
+  margin: 0 0 6px 0;
+}
+
+.nvx-contact-card-sub{
+  margin: 0 0 12px 0;
+  opacity: 0.9;
+}
+
+.nvx-label{
+  display:block;
+  margin: 8px 0 6px;
+  font-size: 0.92rem;
+  opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .nvx-contact-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== OTP / Code input (dark, no white on focus) ===== */
+.nvx-code-wrap {
+  display: grid;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.nvx-code-label {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.nvx-code-input {
+  width: 100%;
+  max-width: 520px;
+  padding: 14px 16px;
+
+  /* 🔒 ყოველთვის მუქი */
+  background-color: rgba(20, 20, 24, 0.9) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+
+  color: #ffffff;
+  caret-color: #ffffff;
+
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 10px;
+  text-align: center;
+
+  box-shadow: 0 10px 22px rgba(0,0,0,0.25);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+/* ❌ ბრაუზერის default focus გათიშვა */
+.nvx-code-input:focus,
+.nvx-code-input:focus-visible {
+  background-color: rgba(20, 20, 24, 0.9) !important; /* 🔑 მთავარი ფიქსი */
+  border-color: rgba(99, 102, 241, 0.7);
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.25),
+    0 14px 26px rgba(0,0,0,0.35);
+}
+
+/* placeholder */
+.nvx-code-input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 6px;
+  font-weight: 700;
+}
+
+/* Safari / Chrome autofill fix */
+.nvx-code-input:-webkit-autofill,
+.nvx-code-input:-webkit-autofill:hover,
+.nvx-code-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ffffff;
+  box-shadow: 0 0 0px 1000px rgba(20, 20, 24, 0.9) inset !important;
+}
+
+.nvx-lang-switch {
+  display: inline-flex;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.nvx-lang-btn {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+  color: rgba(255,255,255,0.82);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.nvx-lang-btn.active {
+  background: rgba(99, 102, 241, 0.85);
+  color: #fff;
+}
+
+/* wrapper – ფიქსირებული პოზიცია */
+.nvx-lang-wrapper {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 9999;
+}
+
+/* ღილაკების კონტეინერი */
+.nvx-lang-switch {
+  display: flex;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* ღილაკი */
+.nvx-lang-btn {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.nvx-lang-btn:hover {
+  opacity: 1;
+}
+
+/* აქტიური ენა */
+.nvx-lang-btn.active {
+  background: #6366f1;
+  color: #fff;
+  opacity: 1;
+}
+
+.nav-container{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  width:100%;
+}
+
+/* logo left */
+.logo{ flex:0 0 auto; }
+
+/* right actions: lang + burger */
+.nav-actions{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex:0 0 auto;
+}
+
+.nvx-lang{
+  display:flex;
+  align-items:center;
+}
+
+/* Desktop nav links keep as you have */
+.nav-list{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+/* mobile: keep burger+lang visible, and nav-list behaves as your existing .open logic */
+@media (max-width: 860px){
+  .nav-container{ gap:10px; }
+  .nav-actions{ gap:8px; }
+}
+
+
+
+
+

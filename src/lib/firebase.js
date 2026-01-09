@@ -13,13 +13,34 @@ import {
 } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAqhPPoz91j6A4YmWMytzC2HCLTheVNMyc",
-  authDomain: "optivexstudio.firebaseapp.com",
-  projectId: "optivexstudio",
-  storageBucket: "optivexstudio.firebasestorage.app",
-  messagingSenderId: "344147371142",
-  appId: "1:344147371142:web:49b3af5b91be446b3a9d07",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
+
+// Optional: dev-ში თუ რამე აკლია, სწრაფად გეტყვის
+const requiredKeys = [
+  "VITE_FIREBASE_API_KEY",
+  "VITE_FIREBASE_AUTH_DOMAIN",
+  "VITE_FIREBASE_PROJECT_ID",
+  "VITE_FIREBASE_STORAGE_BUCKET",
+  "VITE_FIREBASE_MESSAGING_SENDER_ID",
+  "VITE_FIREBASE_APP_ID",
+];
+
+if (import.meta.env.DEV) {
+  const missing = requiredKeys.filter((k) => !import.meta.env[k]);
+  if (missing.length) {
+    console.warn(
+      "[Firebase] Missing env vars:",
+      missing.join(", "),
+      "→ Add them to .env"
+    );
+  }
+}
 
 const app = initializeApp(firebaseConfig);
 
