@@ -28,7 +28,9 @@
   "support": "Support",
   "auth": "Register / Login",
   "logout": "Logout",
-  "contact": "Contact Us"
+  "contact": "Contact Us",
+  "profile": "Profile"
+
 }
 ,
 
@@ -252,7 +254,131 @@
 
   "footer": {
     "text": "Nevarix Studio — Crafted with clean code"
+  },
+
+  "auth": {
+  "title": "Register / Login",
+  "email": "Email",
+  "password": "Password",
+  "login": "Login",
+  "register": "Create account",
+  "logout": "Logout",
+  "otp": "Verification code",
+  "sendCode": "Send code",
+  "verify": "Verify",
+  "loading": "Loading...",
+  "titleLogin": "Welcome Back",
+  "titleRegister": "Create Account",
+  "subtitleLogin": "Join our elite network of digital innovators.",
+  "subtitleRegister": "Join our elite network of innovators.",
+
+  "providerErrorPopupBlocked": "Popup was blocked. Please allow popups and try again.",
+  "providerErrorDefault": "Login failed. Please try again.",
+  "providerWait": "Please wait...",
+  "continueGoogle": "Continue with Google",
+  "continueGithub": "Continue with GitHub",
+  "continueApple": "Continue with Apple",
+
+  "or": "OR",
+
+  "emailInvalid": "Please enter a valid email.",
+  "invalidEmailOrPassword": "Invalid email or password.",
+  "passwordsNoMatch": "Passwords do not match!",
+  "emailAlreadyRegistered": "This email is already registered. Please login.",
+  "emailVerificationNotConfigured": "Email verification is not configured yet. Please use Google/GitHub for registration for now.",
+  "otpSent": "Verification code sent to {{email}}",
+  "otpSendFailed": "Failed to send code. Please try again later.",
+
+  "emailPlaceholder": "Email Address",
+  "passwordPlaceholder": "Password",
+  "confirmPasswordPlaceholder": "Confirm Password",
+
+  "sending": "Sending...",
+  "sendVerificationCode": "Send Verification Code",
+
+  "toggleToLogin": "Already have an account? Login",
+  "toggleToRegister": "Don't have an account? Register here",
+
+  "backHome": "← Back to Home",
+
+  "appleModalTitle": "Apple Sign-In — Coming soon",
+  "appleModalSubtitle": "We’ll enable Apple login after the Apple Developer setup is completed.",
+  "appleModalInfo": "For now you can sign in with Google, GitHub or Email.",
+  "close": "Close"
+},
+"support": {
+  "title": "Support",
+  "subtitle": "Tell us what you need help with and we’ll respond quickly.",
+  "subject": "Subject",
+  "message": "Message",
+  "send": "Send",
+  "success": "Message sent successfully!",
+  "error": "Something went wrong. Please try again."
+},
+
+"support": {
+  "title": "Support Center",
+  "subtitle": "Choose what you need help with.",
+  "open": "Open →",
+  "topics": {
+    "website": {
+      "title": "Website Support",
+      "desc": "Bugs, updates, new sections/pages, performance & SEO."
+    },
+    "design": {
+      "title": "Design / UI Help",
+      "desc": "Layout fixes, responsive, animations, UI polish."
+    },
+    "firebase": {
+      "title": "Firebase / Auth",
+      "desc": "Login issues, rules, hosting, database, functions."
+    },
+    "deployment": {
+      "title": "Deploy / Domain",
+      "desc": "Firebase deploy, custom domain, SSL, redirects."
+    },
+    "consulting": {
+      "title": "Consultation",
+      "desc": "Plan your project, estimate, architecture guidance."
+    },
+    "automation": {
+      "title": "AI Automation",
+      "desc": "Accounting/CRM automations + AI posting (2–3/day), integrations, workflows."
+    },
+    "other": {
+      "title": "Other",
+      "desc": "Not sure which category fits? Tell us what you need and we’ll guide you."
+    }
   }
+},
+
+
+
+"profile": {
+  "fallbackUser": "User",
+  "badge": "Client",
+  "stats": {
+    "projects": "Projects",
+    "support": "Support Requests",
+    "automations": "Automations"
+  },
+  "projects": {
+    "title": "Your Projects",
+    "empty": "You don’t have any active projects yet.",
+    "cta": "Request a Project"
+  },
+  "support": {
+    "title": "Support",
+    "desc": "Need help with an existing project or something else?",
+    "cta": "Open Support Request"
+  }
+}
+
+
+
+
+
+
 }
 
 

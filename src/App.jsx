@@ -7,6 +7,9 @@ import Verify from "./pages/Verify";
 import NotFound from "./pages/NotFound";
 import Support from "./pages/Support";
 import SupportTopic from "./pages/SupportTopic";
+import Profile from "./pages/Profile";
+
+
 
 import LanguageSwitcher from "./components/LanguageSwitcher";
 
@@ -14,9 +17,7 @@ export default function App() {
   return (
     <BrowserRouter>
       {/* 🌐 Language Switcher – fixed top-right */}
-      <div className="nvx-lang-wrapper">
-        <LanguageSwitcher />
-      </div>
+  
 
       <Routes>
         <Route element={<MainLayout />}>
@@ -26,6 +27,8 @@ export default function App() {
           <Route path="/support" element={<Support />} />
           <Route path="/support/:topic" element={<SupportTopic />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/profile" element={<Profile />} />
+
         </Route>
       </Routes>
     </BrowserRouter>

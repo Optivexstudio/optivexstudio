@@ -1,48 +1,39 @@
 import { useNavigate } from "react-router-dom";
-
-const topics = [
-  { id: "website", title: "Website Support", desc: "Bugs, updates, new sections/pages, performance & SEO." },
-  { id: "design", title: "Design / UI Help", desc: "Layout fixes, responsive, animations, UI polish." },
-  { id: "firebase", title: "Firebase / Auth", desc: "Login issues, rules, hosting, database, functions." },
-  { id: "deployment", title: "Deploy / Domain", desc: "Firebase deploy, custom domain, SSL, redirects." },
-  { id: "consulting", title: "Consultation", desc: "Plan your project, estimate, architecture guidance." },
-  {
-  id: "other",
-  title: "Other",
-  desc: "Not sure which category fits? Tell us what you need and we’ll guide you.",
-  icon: "🧩",
-  tags: ["General", "Question", "Help"],
-},
-
-{
-  id: "automation",
-  title: "AI Automation",
-  desc: "Accounting/CRM automations + AI posting (2–3/day), integrations, workflows.",
-  icon: "🤖",
-  tags: ["CRM", "Invoices", "AI Posts"],
-}
-
-
-];
+import { useTranslation } from "react-i18next";
 
 export default function Support() {
   const navigate = useNavigate();
+  const { t } = useTranslation("", { keyPrefix: "support" });
+
+  const topics = [
+    { id: "website", titleKey: "topics.website.title", descKey: "topics.website.desc" },
+    { id: "design", titleKey: "topics.design.title", descKey: "topics.design.desc" },
+    { id: "firebase", titleKey: "topics.firebase.title", descKey: "topics.firebase.desc" },
+    { id: "deployment", titleKey: "topics.deployment.title", descKey: "topics.deployment.desc" },
+    { id: "consulting", titleKey: "topics.consulting.title", descKey: "topics.consulting.desc" },
+    { id: "automation", titleKey: "topics.automation.title", descKey: "topics.automation.desc" },
+    { id: "other", titleKey: "topics.other.title", descKey: "topics.other.desc" },
+  ];
 
   return (
-    <section className="container" style={{ paddingTop: "150px", minHeight: "80vh" }}>
-      <h1 className="section-title">Support Center</h1>
-      <p className="section-subtitle">Choose what you need help with.</p>
+    <section
+      className="container support-page"
+      style={{ paddingTop: "150px", paddingBottom: "80px" }}
+    >
+      <h1 className="section-title">{t("title")}</h1>
+      <p className="section-subtitle">{t("subtitle")}</p>
 
       <div className="support-grid">
-        {topics.map((t) => (
+        {topics.map((item) => (
           <button
-            key={t.id}
+            key={item.id}
             className="support-card"
-            onClick={() => navigate(`/support/${t.id}`)}
+            type="button"
+            onClick={() => navigate(`/support/${item.id}`)}
           >
-            <h3>{t.title}</h3>
-            <p>{t.desc}</p>
-            <span className="support-cta">Open →</span>
+            <h3>{t(item.titleKey)}</h3>
+            <p>{t(item.descKey)}</p>
+            <span className="support-cta">{t("open")}</span>
           </button>
         ))}
       </div>

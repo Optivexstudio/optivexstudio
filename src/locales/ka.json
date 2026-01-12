@@ -28,7 +28,9 @@
   "support": "სუპორტი",
   "auth": "რეგისტრაცია / შესვლა",
   "logout": "გასვლა",
-  "contact": "კონტაქტი"
+  "contact": "კონტაქტი",
+  "profile": "პროფილი"
+
 }
 ,
 
@@ -250,7 +252,109 @@
 
   "footer": {
     "text": "Nevarix Studio — შექმნილი სუფთა კოდით"
+  },
+
+  "support": {
+  "title": "მხარდაჭერის ცენტრი",
+  "subtitle": "აირჩიე რაში გჭირდება დახმარება.",
+  "open": "გახსნა →",
+  "topics": {
+    "website": {
+      "title": "ვებ-საიტის მხარდაჭერა",
+      "desc": "ბაგები, განახლებები, ახალი სექციები/გვერდები, სიჩქარე & SEO."
+    },
+    "design": {
+      "title": "დიზაინი / UI დახმარება",
+      "desc": "ლაიაუთის გასწორება, responsive, ანიმაციები, UI polish."
+    },
+    "firebase": {
+      "title": "Firebase / Auth",
+      "desc": "ლოგინის პრობლემები, rules, hosting, database, functions."
+    },
+    "deployment": {
+      "title": "Deploy / Domain",
+      "desc": "Firebase deploy, დომენი, SSL, redirects."
+    },
+    "consulting": {
+      "title": "კონსულტაცია",
+      "desc": "პროექტის დაგეგმვა, შეფასება, არქიტექტურის რჩევები."
+    },
+    "automation": {
+      "title": "AI ავტომატიზაცია",
+      "desc": "CRM/ანგარიშგების ავტომატიზაცია + AI პოსტინგი (2–3/დღე), ინტეგრაციები."
+    },
+    "other": {
+      "title": "სხვა",
+      "desc": "ვერ არჩევ კატეგორიას? მოგვწერე და გირჩევთ."
+    }
   }
+},
+
+"auth": {
+  "titleLogin": "კეთილი დაბრუნება",
+  "titleRegister": "ანგარიშის შექმნა",
+  "subtitleLogin": "შეუერთდი ჩვენს ელიტურ ქსელს — ციფრული ინოვატორებისთვის.",
+  "subtitleRegister": "შეუერთდი ჩვენს ელიტურ ინოვატორთა ქსელს.",
+
+  "providerErrorPopupBlocked": "Popup დაიბლოკა. ჩართე popups და სცადე თავიდან.",
+  "providerErrorDefault": "შესვლა ვერ მოხერხდა. სცადე თავიდან.",
+  "providerWait": "მოიცადე...",
+  "continueGoogle": "გაგრძელება Google-ით",
+  "continueGithub": "გაგრძელება GitHub-ით",
+  "continueApple": "გაგრძელება Apple-ით",
+
+  "or": "ან",
+
+  "emailInvalid": "გთხოვ შეიყვანე სწორი ელ-ფოსტა.",
+  "invalidEmailOrPassword": "არასწორი ელ-ფოსტა ან პაროლი.",
+  "passwordsNoMatch": "პაროლები არ ემთხვევა!",
+  "emailAlreadyRegistered": "ეს ელ-ფოსტა უკვე რეგისტრირებულია. გთხოვ შედი.",
+  "emailVerificationNotConfigured": "ელ-ფოსტით დადასტურება ჯერ არ არის გამართული. ამ ეტაპზე გამოიყენე Google/GitHub რეგისტრაციისთვის.",
+  "otpSent": "დადასტურების კოდი გაიგზავნა: {{email}}",
+  "otpSendFailed": "კოდის გაგზავნა ვერ მოხერხდა. სცადე მოგვიანებით.",
+
+  "emailPlaceholder": "ელ-ფოსტის მისამართი",
+  "passwordPlaceholder": "პაროლი",
+  "confirmPasswordPlaceholder": "გაიმეორე პაროლი",
+
+  "sending": "იგზავნება...",
+  "sendVerificationCode": "დადასტურების კოდის გაგზავნა",
+  "login": "შესვლა",
+
+  "toggleToLogin": "უკვე გაქვს ანგარიში? შესვლა",
+  "toggleToRegister": "არ გაქვს ანგარიში? დარეგისტრირდი",
+
+  "backHome": "← მთავარზე დაბრუნება",
+
+  "appleModalTitle": "Apple-ით შესვლა — მალე დაემატება",
+  "appleModalSubtitle": "Apple Developer-ის დაყენების დასრულების შემდეგ ჩავრთავთ Apple login-ს.",
+  "appleModalInfo": "ახლა შეგიძლია შეხვიდე Google-ით, GitHub-ით ან Email-ით.",
+  "close": "დახურვა"
+},
+
+
+"profile": {
+  "fallbackUser": "მომხმარებელი",
+  "badge": "კლიენტი",
+  "stats": {
+    "projects": "პროექტები",
+    "support": "მხარდაჭერის მოთხოვნები",
+    "automations": "ავტომატიზაციები"
+  },
+  "projects": {
+    "title": "შენი პროექტები",
+    "empty": "ამ ეტაპზე აქტიური პროექტები არ გაქვს.",
+    "cta": "პროექტის შეკვეთა"
+  },
+  "support": {
+    "title": "მხარდაჭერა",
+    "desc": "გჭირდება დახმარება არსებულ პროექტზე ან სხვა რამეზე?",
+    "cta": "მხარდაჭერის გახსნა"
+  }
+}
+
+
+
 
 
 }

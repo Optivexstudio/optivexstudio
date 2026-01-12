@@ -10,9 +10,11 @@ import {
 
 import { signInWithPopup, fetchSignInMethodsForEmail } from "firebase/auth";
 import emailjs from "@emailjs/browser";
+import { useTranslation } from "react-i18next";
 
 export default function Auth() {
   const navigate = useNavigate();
+  const { t } = useTranslation("", { keyPrefix: "auth" });
 
   const [isRegistering, setIsRegistering] = useState(false);
   const [email, setEmail] = useState("");
@@ -32,7 +34,7 @@ export default function Auth() {
 
   // ✅ Provider login (Google/GitHub)
   const handleProviderLogin = async (provider) => {
-    if (providerLoading) return; // anti double click
+    if (providerLoading) return;
     setProviderError("");
     setProviderLoading(true);
 
@@ -50,11 +52,11 @@ export default function Auth() {
       }
 
       if (err?.code === "auth/popup-blocked") {
-        setProviderError("Popup was blocked. Please allow popups and try again.");
+        setProviderError(t("providerErrorPopupBlocked"));
         return;
       }
 
-      setProviderError(err?.message || "Login failed. Please try again.");
+      setProviderError(err?.message || t("providerErrorDefault"));
     } finally {
       setProviderLoading(false);
     }
@@ -70,7 +72,7 @@ export default function Auth() {
     const cleanEmail = email.trim().toLowerCase();
 
     if (!cleanEmail) {
-      setEmailError("Please enter a valid email.");
+      setEmailError(t("emailInvalid"));
       return;
     }
 
@@ -81,14 +83,14 @@ export default function Auth() {
         navigate("/");
       } catch (err) {
         console.error(err);
-        setEmailError("Invalid email or password.");
+        setEmailError(t("invalidEmailOrPassword"));
       }
       return;
     }
 
     // REGISTER (OTP)
     if (password !== confirmPassword) {
-      setEmailError("Passwords do not match!");
+      setEmailError(t("passwordsNoMatch"));
       return;
     }
 
@@ -99,10 +101,8 @@ export default function Auth() {
       // ✅ 1) CHECK IF EMAIL EXISTS BEFORE OTP
       const methods = await fetchSignInMethodsForEmail(auth, cleanEmail);
 
-      // თუ methods არის ცარიელი => user არ არსებობს
-      // თუ არის რამე => user უკვე რეგისტრირებულია (password/google/github...)
       if (methods.length > 0) {
-        setEmailError("This email is already registered. Please login.");
+        setEmailError(t("emailAlreadyRegistered"));
         setEmailInfo("");
         setIsRegistering(false);
         setSendingCode(false);
@@ -118,9 +118,7 @@ export default function Auth() {
       const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
       if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
-        setEmailError(
-          "Email verification is not configured yet. Please use Google/GitHub for registration for now."
-        );
+        setEmailError(t("emailVerificationNotConfigured"));
         return;
       }
 
@@ -132,7 +130,7 @@ export default function Auth() {
         PUBLIC_KEY
       );
 
-      setEmailInfo("Verification code sent to " + cleanEmail);
+      setEmailInfo(t("otpSent", { email: cleanEmail }));
 
       // ✅ 4) Navigate to verify page
       navigate("/verify", {
@@ -140,7 +138,7 @@ export default function Auth() {
       });
     } catch (err) {
       console.error("Email/OTP error:", err);
-      setEmailError("Failed to send code. Please try again later.");
+      setEmailError(t("otpSendFailed"));
     } finally {
       setSendingCode(false);
     }
@@ -154,16 +152,14 @@ export default function Auth() {
       >
         <div className="cta-wrap">
           <h2 className="section-title">
-            {isRegistering ? "Create Account" : "Welcome Back"}
+            {isRegistering ? t("titleRegister") : t("titleLogin")}
           </h2>
+
           <p className="cta-message">
-            {isRegistering
-              ? "Join our elite network of innovators."
-              : "Join our elite network of digital innovators."}
+            {isRegistering ? t("subtitleRegister") : t("subtitleLogin")}
           </p>
 
           <div className="form-container">
-            {/* Provider errors */}
             {providerError && <div className="auth-error">{providerError}</div>}
 
             {/* Google */}
@@ -193,7 +189,7 @@ export default function Auth() {
                   />
                 </svg>
               </span>
-              {providerLoading ? "Please wait..." : "Continue with Google"}
+              {providerLoading ? t("providerWait") : t("continueGoogle")}
             </button>
 
             {/* GitHub */}
@@ -211,7 +207,7 @@ export default function Auth() {
                   />
                 </svg>
               </span>
-              {providerLoading ? "Please wait..." : "Continue with GitHub"}
+              {providerLoading ? t("providerWait") : t("continueGithub")}
             </button>
 
             {/* Apple */}
@@ -228,21 +224,20 @@ export default function Auth() {
                   />
                 </svg>
               </span>
-              Continue with Apple
+              {t("continueApple")}
             </button>
 
             <div className="separator">
-              <span>OR</span>
+              <span>{t("or")}</span>
             </div>
 
-            {/* Email errors/info */}
             {emailError && <div className="auth-error">{emailError}</div>}
             {emailInfo && <div className="auth-success">{emailInfo}</div>}
 
             <form onSubmit={handleEmailAuth} style={{ width: "100%" }}>
               <input
                 type="email"
-                placeholder="Email Address"
+                placeholder={t("emailPlaceholder")}
                 required
                 className="auth-input"
                 value={email}
@@ -251,7 +246,7 @@ export default function Auth() {
 
               <input
                 type="password"
-                placeholder="Password"
+                placeholder={t("passwordPlaceholder")}
                 required
                 className="auth-input"
                 value={password}
@@ -261,7 +256,7 @@ export default function Auth() {
               {isRegistering && (
                 <input
                   type="password"
-                  placeholder="Confirm Password"
+                  placeholder={t("confirmPasswordPlaceholder")}
                   required
                   className="auth-input"
                   value={confirmPassword}
@@ -277,9 +272,9 @@ export default function Auth() {
               >
                 {isRegistering
                   ? sendingCode
-                    ? "Sending..."
-                    : "Send Verification Code"
-                  : "Login"}
+                    ? t("sending")
+                    : t("sendVerificationCode")
+                  : t("login")}
               </button>
             </form>
 
@@ -291,9 +286,7 @@ export default function Auth() {
                 setEmailInfo("");
               }}
             >
-              {isRegistering
-                ? "Already have an account? Login"
-                : "Don't have an account? Register here"}
+              {isRegistering ? t("toggleToLogin") : t("toggleToRegister")}
             </p>
 
             <button
@@ -302,7 +295,7 @@ export default function Auth() {
               onClick={() => navigate("/")}
               type="button"
             >
-              ← Back to Home
+              {t("backHome")}
             </button>
           </div>
         </div>
@@ -333,18 +326,15 @@ export default function Auth() {
               </div>
 
               <div>
-                <h3 id="nvx-apple-title">Apple Sign-In — Coming soon</h3>
-                <p className="nvx-modal-sub">
-                  We’ll enable Apple login after the Apple Developer setup is completed.
-                </p>
+                <h3 id="nvx-apple-title">{t("appleModalTitle")}</h3>
+                <p className="nvx-modal-sub">{t("appleModalSubtitle")}</p>
               </div>
             </div>
 
             <div className="nvx-modal-body">
               <div className="nvx-info">
                 <span className="dot" />
-                For now you can sign in with <strong>Google</strong>,{" "}
-                <strong>GitHub</strong> or <strong>Email</strong>.
+                {t("appleModalInfo")}
               </div>
             </div>
 
@@ -354,7 +344,7 @@ export default function Auth() {
                 type="button"
                 onClick={() => setShowAppleModal(false)}
               >
-                Close
+                {t("close")}
               </button>
 
               <button
@@ -365,7 +355,7 @@ export default function Auth() {
                   handleProviderLogin(githubProvider);
                 }}
               >
-                Continue with GitHub
+                {t("continueGithub")}
               </button>
             </div>
           </div>

@@ -1,49 +1,76 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-const LanguageSwitcher = () => {
+const LANGS = [
+  { code: "en", label: "EN", flag: "🇬🇧", name: "English" },
+  { code: "ka", label: "KA", flag: "🇬🇪", name: "ქართული" },
+  { code: "ru", label: "RU", flag: "🇷🇺", name: "Русский" },
+];
+
+export default function LanguageSwitcher() {
   const { i18n } = useTranslation();
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
-  const currentLang = i18n.language.toUpperCase();
+  const current = LANGS.find((l) => l.code === i18n.language) || LANGS[0];
 
-  const changeLang = (lng) => {
-    i18n.changeLanguage(lng);
-    localStorage.setItem("nvx_lang", lng);
+  useEffect(() => {
+    const onDocClick = (e) => {
+      if (!ref.current) return;
+      if (!ref.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
+  }, []);
+
+  useEffect(() => {
+    const onEsc = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onEsc);
+    return () => document.removeEventListener("keydown", onEsc);
+  }, []);
+
+  const changeLang = (code) => {
+    i18n.changeLanguage(code);
     setOpen(false);
   };
 
-  // 👇 dropdown გარეთ დაჭერაზე დაიხუროს
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
   return (
-    <div className="lang-dropdown" ref={ref}>
+    <div className="nvx-lang" ref={ref}>
       <button
-        className="lang-btn"
-        onClick={() => setOpen((p) => !p)}
-        aria-label="Change language"
+        className="nvx-lang-btn"
+        type="button"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
       >
-        {currentLang} <span className="arrow">▾</span>
+        <span className="nvx-flag" aria-hidden="true">{current.flag}</span>
+        <span className="nvx-lang-label">{current.label}</span>
+        <span className={`nvx-caret ${open ? "open" : ""}`} aria-hidden="true">
+          ▾
+        </span>
       </button>
 
       {open && (
-        <div className="lang-menu">
-          <button onClick={() => changeLang("en")}>EN</button>
-          <button onClick={() => changeLang("ka")}>KA</button>
-          <button onClick={() => changeLang("ru")}>RU</button>
+        <div className="nvx-lang-menu" role="menu">
+          {LANGS.map((l) => (
+            <button
+              key={l.code}
+              type="button"
+              role="menuitem"
+              className={`nvx-lang-item ${l.code === current.code ? "active" : ""}`}
+              onClick={() => changeLang(l.code)}
+            >
+              <span className="nvx-flag" aria-hidden="true">{l.flag}</span>
+              <div className="nvx-lang-text">
+                <span className="nvx-lang-code">{l.label}</span>
+                <span className="nvx-lang-name">{l.name}</span>
+              </div>
+            </button>
+          ))}
         </div>
       )}
     </div>
   );
-};
-
-export default LanguageSwitcher;
+}

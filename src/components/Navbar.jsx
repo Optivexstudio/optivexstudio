@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 
 const Navbar = () => {
-  // ✅ keyPrefix უკვე გაქვს, ამიტომ t("services") და ა.შ.
   const { t } = useTranslation("", { keyPrefix: "nav" });
 
   const [user, setUser] = useState(null);
@@ -23,11 +22,19 @@ const Navbar = () => {
     return () => unsubscribe();
   }, []);
 
-  const toggleMenu = () => setIsMenuOpen((p) => !p);
+  const toggleMenu = () => {
+    setIsMenuOpen((p) => !p);
+    setShowDropdown(false); // ✅ რომ არ გადაიფაროს
+  };
 
-  // Home-ზე სექციაზე გადასვლა (თუ სხვა გვერდზე ხარ, ჯერ Home, მერე scroll)
-  const goToSection = (hash) => {
+  const closeMenu = () => {
     setIsMenuOpen(false);
+    setShowDropdown(false);
+  };
+
+  // Home-ზე სექციაზე გადასვლა
+  const goToSection = (hash) => {
+    closeMenu();
 
     if (location.pathname !== "/") {
       navigate("/", { state: { scrollTo: hash } });
@@ -39,7 +46,7 @@ const Navbar = () => {
   };
 
   const goHomeTop = () => {
-    setIsMenuOpen(false);
+    closeMenu();
 
     if (location.pathname !== "/") {
       navigate("/");
@@ -51,19 +58,18 @@ const Navbar = () => {
   };
 
   const goAuth = () => {
-    setIsMenuOpen(false);
+    closeMenu();
     navigate("/auth");
   };
 
   const goSupport = () => {
-    setIsMenuOpen(false);
+    closeMenu();
     navigate("/support");
   };
 
   const handleLogout = async () => {
     await signOut(auth);
-    setShowDropdown(false);
-    setIsMenuOpen(false);
+    closeMenu();
     navigate("/");
   };
 
@@ -82,14 +88,16 @@ const Navbar = () => {
           Nevarix
         </a>
 
-        {/* ✅ აქ დავამატე wrapper რომ LanguageSwitcher + Burger გვერდიგვერდ იყოს */}
+        {/* ✅ RIGHT SIDE: Language + Burger გვერდიგვერდ */}
         <div className="nav-actions">
-        
+          <LanguageSwitcher />
 
           <button
             id="burger"
             className={`burger ${isMenuOpen ? "active" : ""}`}
-            aria-label={t("openMenu")}
+            aria-label={isMenuOpen ? t("closeMenu") : t("openMenu")}
+            aria-expanded={isMenuOpen}
+            aria-controls="nav-menu"
             onClick={toggleMenu}
             type="button"
           >
@@ -140,7 +148,6 @@ const Navbar = () => {
             {t("faq")}
           </a>
 
-          {/* ✅ Support მხოლოდ დალოგინებულზე */}
           {user && (
             <a
               href="/support"
@@ -174,17 +181,32 @@ const Navbar = () => {
                 {user.email?.split("@")[0]}
               </button>
 
-              {showDropdown && (
-                <div className="dropdown-content" style={{ display: "block" }}>
-                  <button
-                    className="btn small-btn logout-red-btn"
-                    onClick={handleLogout}
-                    type="button"
-                  >
-                    {t("logout")}
-                  </button>
-                </div>
-              )}
+          {showDropdown && (
+  <div className="dropdown-content" style={{ display: "block" }}>
+    <button
+  className="btn small-btn profile-btn"
+  type="button"
+  onClick={() => {
+    setShowDropdown(false);
+    setIsMenuOpen(false);
+    navigate("/profile");
+  }}
+>
+   {t("profile")}
+</button>
+
+
+    <button
+      className="btn small-btn logout-red-btn"
+      onClick={handleLogout}
+      type="button"
+      style={{ marginTop: "10px" }}
+    >
+      {t("logout")}
+    </button>
+  </div>
+)}
+
             </div>
           )}
 
