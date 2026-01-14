@@ -26,6 +26,7 @@ export default function Auth() {
   // Provider UI
   const [providerLoading, setProviderLoading] = useState(false);
   const [providerError, setProviderError] = useState("");
+  const [activeProvider, setActiveProvider] = useState(null); // ✅ ADD (google/github)
 
   // Email UI
   const [sendingCode, setSendingCode] = useState(false);
@@ -33,10 +34,11 @@ export default function Auth() {
   const [emailInfo, setEmailInfo] = useState("");
 
   // ✅ Provider login (Google/GitHub)
-  const handleProviderLogin = async (provider) => {
+  const handleProviderLogin = async (provider, providerName) => {
     if (providerLoading) return;
     setProviderError("");
     setProviderLoading(true);
+    setActiveProvider(providerName); // ✅ track which button was clicked
 
     try {
       await signInWithPopup(auth, provider);
@@ -59,6 +61,7 @@ export default function Auth() {
       setProviderError(err?.message || t("providerErrorDefault"));
     } finally {
       setProviderLoading(false);
+      setActiveProvider(null); // ✅ reset
     }
   };
 
@@ -165,7 +168,7 @@ export default function Auth() {
             {/* Google */}
             <button
               className="google-btn"
-              onClick={() => handleProviderLogin(googleProvider)}
+              onClick={() => handleProviderLogin(googleProvider, "google")}
               type="button"
               disabled={providerLoading}
             >
@@ -189,13 +192,15 @@ export default function Auth() {
                   />
                 </svg>
               </span>
-              {providerLoading ? t("providerWait") : t("continueGoogle")}
+              {providerLoading && activeProvider === "google"
+                ? t("providerWait")
+                : t("continueGoogle")}
             </button>
 
             {/* GitHub */}
             <button
               className="auth-provider-btn github"
-              onClick={() => handleProviderLogin(githubProvider)}
+              onClick={() => handleProviderLogin(githubProvider, "github")}
               type="button"
               disabled={providerLoading}
             >
@@ -207,7 +212,9 @@ export default function Auth() {
                   />
                 </svg>
               </span>
-              {providerLoading ? t("providerWait") : t("continueGithub")}
+              {providerLoading && activeProvider === "github"
+                ? t("providerWait")
+                : t("continueGithub")}
             </button>
 
             {/* Apple */}
@@ -352,7 +359,7 @@ export default function Auth() {
                 type="button"
                 onClick={() => {
                   setShowAppleModal(false);
-                  handleProviderLogin(githubProvider);
+                  handleProviderLogin(githubProvider, "github");
                 }}
               >
                 {t("continueGithub")}

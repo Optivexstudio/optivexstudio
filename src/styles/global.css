@@ -304,62 +304,122 @@ nav.scrolled {
 
 /* MOBILE MENU STYLES */
 @media (max-width: 900px) {
-    .nav-list {
-        display: none;
-        flex-direction: column;
-        position: fixed; /* Fixed position for overlay */
-        top: 65px; 
-        left: 0;
-        width: 100%;
-        background-color: #ffffff;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        padding: 30px 0;
-        text-align: center;
-        transition: transform 0.3s ease-out;
-        transform: translateX(-100%); /* მალავს მარცხნივ */
-        height: 100vh;
-        z-index: 999;
-    }
-    
-    .nav-list.open {
-        transform: translateX(0); /* აჩენს */
-    }
+  .nav-list {
+    display: flex;
+    flex-direction: column;
 
-    .nav-list a {
-        padding: 15px 0;
-        border-bottom: 1px solid #f1f5f9;
-        color: #071133; /* მუქი ტექსტი მენიუში */
-    }
-    
-    .nav-list a:hover {
-        background-color: #f6f9ff;
-    }
+    position: fixed;
 
-    .nav-list a:last-child {
-        border-bottom: none;
-    }
-    
-    .burger {
-        display: flex;
-    }
-    
-    .hide-on-mobile {
-        display: none !important; 
-    }
-    
-    /* ავთენტიფიკაციის გასწორება მენიუში */
-    .auth-control {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        padding: 15px 0;
-        border-bottom: 1px solid #f1f5f9;
-        gap: 10px;
-    }
-    .user-email-btn {
-        color: #071133;
-    }
+    /* ✅ ცენტრში */
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.98);
+
+    width: 92%;
+    max-width: 420px;
+
+    height: auto;
+    max-height: 80vh;
+
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+
+    padding: 10px 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s ease;
+
+    z-index: 999;
+    gap: 2px;
+  }
+
+  .nav-list.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -58%) scale(1); /* ✅ ოდნავ მაღლა */
+  }
+
+  /* ლინკები */
+  .nav-list a {
+    display: block;
+    width: 100%;
+    padding: 14px 20px;
+    text-align: center;
+
+    border-bottom: 1px solid #f1f5f9;
+    color: #071133;
+    font-weight: 500;
+  }
+
+  .nav-list a:hover {
+    background: #f6f9ff;
+  }
+
+  .nav-list a:last-child {
+    border-bottom: none;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  .hide-on-mobile {
+    display: none !important;
+  }
+
+  /* Auth block */
+  .auth-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    padding: 12px 20px;
+    gap: 10px;
+
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .user-email-btn {
+    width: 100%;
+    text-align: center;
+    color: #071133;
+    font-weight: 600;
+  }
+
+  .auth-control {
+    position: relative;
+    width: 100%;
+  }
+
+  .dropdown-content {
+    position: static; /* ❗️აბსოლუტური აღარ იყოს */
+    margin-top: 10px;
+
+    width: 100%;
+    background: #ffffff;
+
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    padding: 10px;
+  }
+
+  .dropdown-content button {
+    width: 100%;
+    text-align: center;
+  }
 }
+
+
 
 
 /* --- 4. HERO SECTION --- */
@@ -699,6 +759,39 @@ section {
 .ghost:hover {
     background: #f1f5f9;
 }
+
+
+@media (max-width: 900px) {
+  /* ✅ თუ ეს ბარათები grid/flex-შია */
+  .projects-grid,
+  .portfolio-grid,
+  .project-grid {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;   /* ✅ ცენტრში */
+    width: 100%;
+  }
+
+  /* ✅ თვითონ card რომ ცენტრში დადგეს */
+  .project-card,
+  .portfolio-card,
+  .project-item {
+    width: min(92%, 420px); /* ✅ ეკრანს მოერგება */
+    margin: 0 auto;         /* ✅ ცენტრში */
+  }
+
+  /* ✅ სურათი ყოველთვის ცენტრში და სწორი ზომა */
+  .project-card img,
+  .portfolio-card img,
+  .project-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    object-fit: cover;
+  }
+}
+
 
 /* --- 12. LIGHTBOX --- */
 
@@ -3479,6 +3572,8 @@ input.otp-input:-webkit-autofill {
   color: #6b7280;
   margin-bottom: 16px;
 }
+
+
 
 
 
