@@ -24,7 +24,7 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen((p) => !p);
-    setShowDropdown(false); // ✅ რომ არ გადაიფაროს
+    setShowDropdown(false);
   };
 
   const closeMenu = () => {
@@ -32,27 +32,22 @@ const Navbar = () => {
     setShowDropdown(false);
   };
 
-  // Home-ზე სექციაზე გადასვლა
   const goToSection = (hash) => {
     closeMenu();
-
     if (location.pathname !== "/") {
       navigate("/", { state: { scrollTo: hash } });
       return;
     }
-
     const el = document.querySelector(hash);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   const goHomeTop = () => {
     closeMenu();
-
     if (location.pathname !== "/") {
       navigate("/");
       return;
     }
-
     const el = document.querySelector("#hero");
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
@@ -67,16 +62,29 @@ const Navbar = () => {
     navigate("/support");
   };
 
+  // ✅ განახლებული Logout ფუნქცია
   const handleLogout = async () => {
-    await signOut(auth);
-    closeMenu();
-    navigate("/");
+    try {
+      // 1. ვშლით ჩატის ისტორიას ბრაუზერიდან
+      localStorage.removeItem('intergram-id');
+      localStorage.removeItem('intergram-chats');
+      
+      // 2. გამოვდივართ Firebase-დან
+      await signOut(auth);
+      
+      closeMenu();
+      navigate("/");
+      
+      // 3. სრული გადატვირთვა, რომ ჩატის სკრიპტიც გასუფთავდეს
+      window.location.reload();
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
   };
 
   return (
     <nav aria-label={t("aria")}>
       <div className="nav-container">
-        {/* ლოგო -> Home (hero) */}
         <a
           className="logo"
           href="#hero"
@@ -88,10 +96,8 @@ const Navbar = () => {
           Nevarix
         </a>
 
-        {/* ✅ RIGHT SIDE: Language + Burger გვერდიგვერდ */}
         <div className="nav-actions">
           <LanguageSwitcher />
-
           <button
             id="burger"
             className={`burger ${isMenuOpen ? "active" : ""}`}
@@ -108,45 +114,10 @@ const Navbar = () => {
         </div>
 
         <div id="nav-menu" className={`nav-list ${isMenuOpen ? "open" : ""}`}>
-          <a
-            href="#services"
-            onClick={(e) => {
-              e.preventDefault();
-              goToSection("#services");
-            }}
-          >
-            {t("services")}
-          </a>
-
-          <a
-            href="#automation"
-            onClick={(e) => {
-              e.preventDefault();
-              goToSection("#automation");
-            }}
-          >
-            {t("automation")}
-          </a>
-
-          <a
-            href="#projects"
-            onClick={(e) => {
-              e.preventDefault();
-              goToSection("#projects");
-            }}
-          >
-            {t("projects")}
-          </a>
-
-          <a
-            href="#faq"
-            onClick={(e) => {
-              e.preventDefault();
-              goToSection("#faq");
-            }}
-          >
-            {t("faq")}
-          </a>
+          <a href="#services" onClick={(e) => { e.preventDefault(); goToSection("#services"); }}>{t("services")}</a>
+          <a href="#automation" onClick={(e) => { e.preventDefault(); goToSection("#automation"); }}>{t("automation")}</a>
+          <a href="#projects" onClick={(e) => { e.preventDefault(); goToSection("#projects"); }}>{t("projects")}</a>
+          <a href="#faq" onClick={(e) => { e.preventDefault(); goToSection("#faq"); }}>{t("faq")}</a>
 
           {user && (
             <a
@@ -181,32 +152,29 @@ const Navbar = () => {
                 {user.email?.split("@")[0]}
               </button>
 
-          {showDropdown && (
-  <div className="dropdown-content" style={{ display: "block" }}>
-    <button
-  className="btn small-btn profile-btn"
-  type="button"
-  onClick={() => {
-    setShowDropdown(false);
-    setIsMenuOpen(false);
-    navigate("/profile");
-  }}
->
-   {t("profile")}
-</button>
-
-
-    <button
-      className="btn small-btn logout-red-btn"
-      onClick={handleLogout}
-      type="button"
-      style={{ marginTop: "10px" }}
-    >
-      {t("logout")}
-    </button>
-  </div>
-)}
-
+              {showDropdown && (
+                <div className="dropdown-content" style={{ display: "block" }}>
+                  <button
+                    className="btn small-btn profile-btn"
+                    type="button"
+                    onClick={() => {
+                      setShowDropdown(false);
+                      setIsMenuOpen(false);
+                      navigate("/profile");
+                    }}
+                  >
+                    {t("profile")}
+                  </button>
+                  <button
+                    className="btn small-btn logout-red-btn"
+                    onClick={handleLogout}
+                    type="button"
+                    style={{ marginTop: "10px" }}
+                  >
+                    {t("logout")}
+                  </button>
+                </div>
+              )}
             </div>
           )}
 

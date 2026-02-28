@@ -5,30 +5,24 @@ import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import Verify from "./pages/Verify";
 import NotFound from "./pages/NotFound";
-import Support from "./pages/Support";
-import SupportTopic from "./pages/SupportTopic";
+import Support from "./pages/Support"; // მხოლოდ ეს დავტოვოთ
 import Profile from "./pages/Profile";
-
-
-
-import LanguageSwitcher from "./components/LanguageSwitcher";
 
 export default function App() {
   return (
     <BrowserRouter>
-      {/* 🌐 Language Switcher – fixed top-right */}
-  
-
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/verify" element={<Verify />} />
+          
+          {/* ორივე მისამართზე ვუშვებთ Support-ს */}
           <Route path="/support" element={<Support />} />
-          <Route path="/support/:topic" element={<SupportTopic />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/support/:id" element={<Support />} />
+          
           <Route path="/profile" element={<Profile />} />
-
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

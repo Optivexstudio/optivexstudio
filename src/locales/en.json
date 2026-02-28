@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "Nevarix Studio",
-    "subtitleStrong": "We build custom, fast and maintainable websites using HTML • CSS • JavaScript.",
+    "subtitleStrong": "Building the next generation of fast, maintainable, and AI-powered websites. We build digital assets for your business growth.",
     "subtitleLine": "Focused on performance, accessibility and real business results.",
     "ctaProjects": "See Projects",
     "ctaQuote": "Request Quote"
@@ -231,24 +231,44 @@
     }
   },
 
+   
   "contact": {
-    "title": "Start a Project",
-    "subtitle": "Choose how you want to contact us — quick chat, Telegram, or send full details by email.",
+    "title": "Get in Touch",
+    "subtitle": "Ready to bring your ideas to life? Choose the best way to reach us.",
     "email": {
-      "title": "📩 Send Details (Email)",
+      "title": "Send Details (Email)",
       "subtitle": "Best option if you want pricing + timeline. We reply fast."
     },
     "telegram": {
-      "title": "📲 Telegram",
-      "subtitle": "Prefer Telegram? Message us directly.",
-      "btn": "Open Telegram",
-      "label": "Telegram:"
+      "text": "Prefer Telegram? Message us directly for a quick chat.",
+      "btn": "Open Telegram"
     },
-    "chat": {
-      "title": "💬 Live Chat",
-      "subtitle": "Want quick questions & answers? Chat with us now.",
-      "btn": "Open Live Chat",
-      "note": "If we’re offline, use the email form — we’ll respond ASAP."
+    "social": {
+      "title": "Social Media",
+      "text": "Follow us or reach out via Messenger and Instagram."
+    },
+
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone (optional)",
+      "service": "Service",
+      "budget": "Budget",
+      "message": "Message",
+      "send": "Send Request",
+      "success": "Message sent successfully!",
+      "error": "Failed to send message.",
+      "direct_email": "Or email us directly:",
+      "budget_options": {
+      "not_sure": "Not sure"
+    },
+    "placeholders": {
+        "name": "Enter your name",
+        "email": "example@mail.com",
+        "phone": "+995 5xx xx xx xx",
+        "message": "Tell us about your project..."
+      }
+      
     }
   },
 
@@ -306,49 +326,21 @@
   "appleModalInfo": "For now you can sign in with Google, GitHub or Email.",
   "close": "Close"
 },
-"support": {
-  "title": "Support",
-  "subtitle": "Tell us what you need help with and we’ll respond quickly.",
-  "subject": "Subject",
-  "message": "Message",
-  "send": "Send",
-  "success": "Message sent successfully!",
-  "error": "Something went wrong. Please try again."
-},
 
 "support": {
-  "title": "Support Center",
-  "subtitle": "Choose what you need help with.",
-  "open": "Open →",
+  "open_topic": "Open Topic",
+  "back": "Back to Categories",
+  "ready_help": "Ready to help! Click the button below to reach us through your preferred platform.",
+  "need_help_topic": "Need support for this topic?",
+  "request_btn": "Request Support",
   "topics": {
-    "website": {
-      "title": "Website Support",
-      "desc": "Bugs, updates, new sections/pages, performance & SEO."
-    },
-    "design": {
-      "title": "Design / UI Help",
-      "desc": "Layout fixes, responsive, animations, UI polish."
-    },
-    "firebase": {
-      "title": "Firebase / Auth",
-      "desc": "Login issues, rules, hosting, database, functions."
-    },
-    "deployment": {
-      "title": "Deploy / Domain",
-      "desc": "Firebase deploy, custom domain, SSL, redirects."
-    },
-    "consulting": {
-      "title": "Consultation",
-      "desc": "Plan your project, estimate, architecture guidance."
-    },
-    "automation": {
-      "title": "AI Automation",
-      "desc": "Accounting/CRM automations + AI posting (2–3/day), integrations, workflows."
-    },
-    "other": {
-      "title": "Other",
-      "desc": "Not sure which category fits? Tell us what you need and we’ll guide you."
-    }
+    "website": { "title": "Website Support", "desc": "Bugs, updates, new sections/pages, performance & SEO." },
+    "design": { "title": "Design / UI Help", "desc": "Layout fixes, responsive, animations, UI polish." },
+    "firebase": { "title": "Firebase / Auth", "desc": "Login issues, database rules, hosting config." },
+    "deploy": { "title": "Deploy / Domain", "desc": "Custom domain, SSL, redirects, server issues." },
+    "consultation": { "title": "Consultation", "desc": "Project planning, architecture and tech stack." },
+    "automation": { "title": "AI Automation", "desc": "Workflows, CRM integrations and AI agents." },
+    "other": { "title": "Other", "desc": "Tell us what you need help with." }
   }
 },
 
@@ -372,6 +364,8 @@
     "desc": "Need help with an existing project or something else?",
     "cta": "Open Support Request"
   }
+
+  
 }
 
 

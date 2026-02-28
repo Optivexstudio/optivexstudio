@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { openTawk } from "../lib/tawk.js";
 import ContactForm from "../components/ContactForm.jsx";
 
 
@@ -461,55 +460,69 @@ export default function Home() {
   </div>
 </section>
 
-{/* --- CONTACT --- */}
 <section id="contact" className="collaboration-cta revealer">
   <div className="container">
+    {/* სათაურების თარგმანი */}
     <h2 className="section-title">{t("contact.title")}</h2>
     <p className="section-subtitle">{t("contact.subtitle")}</p>
 
-    <div className="nvx-contact-grid">
-      <div className="nvx-contact-card">
-        <h3 className="nvx-contact-card-title">{t("contact.email.title")}</h3>
-        <p className="nvx-contact-card-sub">{t("contact.email.subtitle")}</p>
-        <ContactForm />
-      </div>
+    <div className="nvx-contact-card" style={{ marginBottom: '60px', width: '100%' }}>
+      <h3 className="nvx-contact-card-title" style={{ textAlign: 'center' }}>
+        {t("contact.email.title")}
+      </h3>
+      <p className="nvx-contact-card-sub" style={{ textAlign: 'center', marginBottom: '30px' }}>
+        {t("contact.email.subtitle")}
+      </p>
+      <ContactForm />
+    </div>
 
-      <div className="nvx-contact-card">
-        <h3 className="nvx-contact-card-title">{t("contact.telegram.title")}</h3>
-        <p className="nvx-contact-card-sub">{t("contact.telegram.subtitle")}</p>
-
+    {/* ✅ დავამატე id="direct-contact" ზუსტად აქ */}
+    <div id="direct-contact" className="contacts-grid" style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+      gap: '40px',
+      borderTop: '1px solid rgba(0,0,0,0.1)',
+      paddingTop: '40px'
+    }}>
+      
+      {/* Telegram თარგმანი */}
+      <div className="contact-col" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <h3 style={{ fontSize: '1.5rem', marginBottom: '10px' }}>📲 Telegram</h3>
+        <p style={{ color: '#666', marginBottom: '20px', maxWidth: '300px' }}>
+          {t("contact.telegram.text")}
+        </p>
         <a
-          className="btn primary large-btn"
           href="https://t.me/nevarixstudio"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
+          className="btn large-btn"
+          style={{ backgroundColor: '#0088cc', color: 'white', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '100%', maxWidth: '280px' }}
         >
           {t("contact.telegram.btn")}
         </a>
-
-        <p className="email-note" style={{ marginTop: 10 }}>
-          {t("contact.telegram.label")} <strong>@nevarixstudio</strong>
-        </p>
+        <p style={{ marginTop: '10px', fontSize: '0.9rem', fontWeight: 'bold' }}>@nevarixstudio</p>
       </div>
 
-      <div className="nvx-contact-card">
-        <h3 className="nvx-contact-card-title">{t("contact.chat.title")}</h3>
-        <p className="nvx-contact-card-sub">{t("contact.chat.subtitle")}</p>
-
-        <button
-          type="button"
-          className="btn ghost large-btn"
-          onClick={async () => {
-            await openTawk();
-          }}
-        >
-          {t("contact.chat.btn")}
-        </button>
-
-        <p className="email-note" style={{ marginTop: 10 }}>
-          {t("contact.chat.note")}
+      {/* Social Media თარგმანი */}
+      <div className="contact-col" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <h3 style={{ fontSize: '1.5rem', marginBottom: '10px' }}>💬 {t("contact.social.title")}</h3>
+        <p style={{ color: '#666', marginBottom: '20px', maxWidth: '300px' }}>
+          {t("contact.social.text")}
         </p>
+        
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', alignItems: 'center' }}>
+          <a href="https://m.me/nevarixstudio" target="_blank" rel="noopener noreferrer" className="btn ghost large-btn" style={{ textDecoration: 'none', width: '100%', maxWidth: '280px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.145 2 11.258c0 2.914 1.455 5.517 3.733 7.245V22l3.225-1.768c.99.274 2.035.426 3.042.426 5.523 0 10-4.145 10-9.258S17.523 2 12 2zm1.066 12.333l-2.55-2.722-4.975 2.722 5.474-5.814 2.613 2.722 4.912-2.722-5.474 5.814z"/></svg>
+            Messenger
+          </a>
+
+          <a href="https://instagram.com/nevarixstudio" target="_blank" rel="noopener noreferrer" className="btn ghost large-btn" style={{ textDecoration: 'none', width: '100%', maxWidth: '280px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            Instagram
+          </a>
+        </div>
       </div>
+
     </div>
   </div>
 </section>

@@ -1,5 +1,5 @@
 // ===========================================
-// Nevarix STUDIO - APP.JS (საბოლოო, გამართული ვერსია 6.0 - Only Google Auth)
+// Optivex STUDIO - APP.JS (გამართული ვერსია 7.0 - Tawk.to removed)
 // ===========================================
 
 // 0. გლობალური UI ცვლადები
@@ -358,39 +358,28 @@ if (form) {
 }
 
 // ===========================================
-// 3. Firebase Auth & Tawk.to UI მართვა (GLOBAL)
+// 3. Firebase Auth UI მართვა (GLOBAL)
 // ===========================================
 
-function handleChatVisibility(user) {
-    if (typeof Tawk_API === 'undefined' || !Tawk_API.showWidget) return; 
-
-    const chatContainerMax = document.querySelector('.tawk-maximized-container');
-    const chatContainerMin = document.querySelector('.tawk-minimized-container');
-
-    const hideStyles = 'visibility: hidden !important; opacity: 0 !important; display: none !important; width: 0 !important; height: 0 !important; pointer-events: none !important;';
-    const showStyles = 'visibility: visible !important; opacity: 1 !important; display: block !important; width: auto !important; height: auto !important; pointer-events: auto !important;';
-
-    if (user) {
-        Tawk_API.showWidget(); 
-        Tawk_API.setAttributes({ 'email': user.email }, function(error){});
-
-        if (chatContainerMax) chatContainerMax.style.cssText = showStyles;
-        if (chatContainerMin) chatContainerMin.style.cssText = showStyles;
-
-    } else {
-        Tawk_API.hideWidget(); nhtwsx
-        Tawk_API.setAttributes({ 'name': null, 'email': null }, function(error){});
-
-        if (chatContainerMax) chatContainerMax.style.cssText = hideStyles;
-        if (chatContainerMin) chatContainerMin.style.cssText = hideStyles;
-    }
+if (openChatBtn) {
+    openChatBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        if (typeof auth === 'undefined' || !auth.currentUser) {
+            if (authModal) {
+                authModal.style.display = 'block';
+            }
+        } else {
+            // Open Intergram chat
+            if (typeof window.openOptivexChat === 'function') {
+                window.openOptivexChat();
+            }
+        }
+    });
 }
-
 
 if (typeof auth !== 'undefined') {
     auth.onAuthStateChanged((user) => {
-        handleChatVisibility(user);
-
         if (user) {
             if (authLinkLoggedOut) authLinkLoggedOut.style.display = 'none';
             if (authInfoLoggedIn) authInfoLoggedIn.style.display = 'flex'; 
@@ -422,15 +411,8 @@ if (openChatBtn) {
                 authModal.style.display = 'block';
             }
         } else {
-            const chatContainerMax = document.querySelector('.tawk-maximized-container');
-            const chatContainerMin = document.querySelector('.tawk-minimized-container');
-
-            if (chatContainerMax) { chatContainerMax.style.cssText = ''; }
-            if (chatContainerMin) { chatContainerMin.style.cssText = ''; }
-
-            if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
-                Tawk_API.maximize(); 
-            }
+            // TODO: Open our custom chat widget here
+            console.log('Opening custom chat...');
         }
     });
 }

@@ -3576,8 +3576,10 @@ input.otp-input:-webkit-autofill {
 
 
 
-
-
-
-
+/* Intergram-ის ბრენდინგის სრული გაქრობა */
+/* ვპოულობთ კონკრეტულად Intergram-ის ფუტერს მისი კლასით */
+#intergramRoot iframe {
+    height: calc(100% + 15px) !important;
+    bottom: 20px !important;
+}
 

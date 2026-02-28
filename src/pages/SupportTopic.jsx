@@ -1,5 +1,4 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { openTawk } from "../lib/tawk.js";
 import { auth } from "../lib/firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
@@ -31,29 +30,25 @@ const content = {
     items: ["Project planning", "Architecture", "Pricing estimate", "Roadmap"],
   },
   other: {
-  title: "Other Support",
-  items: [
-    "General questions",
-    "Not listed above",
-    "Unsure what you need",
-    "Custom request",
-  ],
-}, 
+    title: "Other Support",
+    items: [
+      "General questions",
+      "Not listed above",
+      "Unsure what you need",
+      "Custom request",
+    ],
+  }, 
 
-automation: {
-  title: "AI Automation Support",
-  items: [
-    "CRM / clients workflow setup",
-    "Invoices + overdue reminders automation",
-    "AI content generation (2–3 posts/day)",
-    "Approval flow + auto-publish",
-    "Integrations (Meta/LinkedIn, Email/SMS)",
-  ],
-},
-
-
-
-
+  automation: {
+    title: "AI Automation Support",
+    items: [
+      "CRM / clients workflow setup",
+      "Invoices + overdue reminders automation",
+      "AI content generation (2–3 posts/day)",
+      "Approval flow + auto-publish",
+      "Integrations (Meta/LinkedIn, Email/SMS)",
+    ],
+  },
 };
 
 export default function SupportTopic() {
@@ -69,27 +64,22 @@ export default function SupportTopic() {
 
   const data = content[topic];
 
-  const handleRequestSupport = async () => {
+  const handleRequestSupport = () => {
     if (!user) {
       navigate("/auth");
       return;
     }
 
-    await openTawk();
-
-    // Optional: ჩატში თემის/მომხმარებლის ატრიბუტები (თუ ხელმისაწვდომია)
-    setTimeout(() => {
-      if (window.Tawk_API && typeof window.Tawk_API.setAttributes === "function") {
-        window.Tawk_API.setAttributes(
-          {
-            name: user.email?.split("@")[0] || "Client",
-            email: user.email || "",
-            support_topic: topic,
-          },
-          function () {}
-        );
-      }
-    }, 200);
+    console.log('🔵 Request Support clicked!');
+    console.log('User:', user.email);
+    console.log('Topic:', topic);
+    
+    if (window.openOptivexChat) {
+      window.openOptivexChat();
+    } else {
+      console.error('❌ window.openOptivexChat not found!');
+      alert('ჩატის სისტემა ჯერ არ არის ჩატვირთული. გთხოვთ განაახლოთ გვერდი.');
+    }
   };
 
   if (!data) {
